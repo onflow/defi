@@ -195,153 +195,134 @@ By combining proven DeFi building blocks with Flow’s unique technology, the ec
 
 # Platform: Deribit
 
-## Screenshot 1
-**Image**  
+This section compiles all **Deribit** screenshots, each with detailed commentary and a final **Black–Scholes** discussion. The goal is to illustrate how Deribit operates and draw parallels to potential Flow EVM/Cadence-based DeFi solutions.
+
+---
+
+## **Screenshot 1**  
+**Title**: *Deribit Dashboard / Landing*  
+**Reference**:  
 ![Screenshot 1 – Deribit Dashboard](DeFi-Platforms-Comparison/Deribit-Landing-Dashboard.png)
 
----
-
-### Observations / Commentary
+### **Observations / Commentary**
 
 1. **Dashboard Overview**  
-   - Shows a consolidated view of total account value (`$13.73` in this example).  
-   - Sections for Positions, Open Orders, Trades, and Expiry Greeks are all present but currently empty.  
+   - Displays **Total Account Value** (`$13.73` in the example), which aggregates the user’s net holdings.  
+   - Upper navigation includes tabs for **Spot**, **Futures**, **Options**, and **Strategy**, plus sub-tools (Price Ladder, Option Wizard).  
+   - The layout is quite minimal when there are **no open positions**, focusing on a “Welcome” banner and the user’s ID.
 
-2. **Asset Balances**  
-   - Displays user holdings for BTC and ETH, each with a corresponding USD value.  
-   - Quick “Trade” or “Wallet” actions are available alongside each asset.  
+2. **Assets & Quick Actions**  
+   - Lists balances in BTC and ETH, each with an approximate USD conversion.  
+   - **Trade** and **Wallet** buttons beside each asset provide quick deposit, withdrawal, or trading flows.  
+   - Intended to simplify moving between spot trading, derivatives, and account funding.
 
-3. **Navigation & Tools**  
-   - Top navigation includes tabs like **Spot**, **Futures**, **Options**, **Strategy**, along with sub-features such as Price Ladder and Option Wizard.  
-   - The “What’s Hot Today” panel highlights top-performing or highest-volume options/futures.
+3. **Positions & Greeks**  
+   - Tabs (Positions, Open Orders, Your Trades, Expiry Greeks) appear but are empty if the user hasn’t placed trades.  
+   - “Expiry Greeks” is unique to Deribit, giving an at-a-glance measure of Delta, Gamma, etc., near expiry if you have open options.
 
-4. **Option-Focused Exchange**  
-   - Deribit is well-known for BTC and ETH options/futures. The interface reflects an options-centric layout, surfacing option strikes, volumes, and mark prices.
+4. **What’s Hot / Trending**  
+   - A side panel highlights the most actively traded Options and Futures (by 24h volume or performance).  
+   - Users can quickly see which contracts are in demand or spiking in volume.
 
----
+### **What It Has**
 
-### What It Has
+- **Clean, All-in-One Dashboard**: Aggregates account value, positions, asset balances, and top traded instruments.  
+- **Seamless Navigation**: Quick pivot to spot trading, futures, options, or advanced strategy tools.  
+- **Intro to Options Focus**: The presence of “Expiry Greeks” and “What’s Hot” points to an options-centric exchange.
 
-- A clean dashboard that consolidates multiple product types (Futures, Options) in one place.  
-- Integrated “Trade” button for quick order placement from the asset list.  
-- Real-time or near real-time price data and volume statistics for active options.
+### **What Might Be Missing (Compared to a DeFi Perspective)**
 
----
+1. **On-Chain Collateral or Composability**  
+   - Only BTC/ETH custodial wallets shown. No resource-oriented approach or bridging in staked tokens, yield-farming positions, etc.  
+   - In DeFi, you might see staked tokens, LP tokens, or multi-asset collateral displayed seamlessly on a single dashboard.
 
-### What Might Be Missing (Compared to a DeFi Perspective)
+2. **Atomic Multi-Step Transactions**  
+   - No built-in ability to do “borrow from lending protocol → trade on derivatives → repay or hedge” in one go.  
+   - DeFi with Cadence can unify these steps in a single, revertible transaction for safety.
 
-1. **On-Chain Collateral Options**  
-   - No direct way to use staked tokens or AMM LP tokens as collateral.  
-   - Traditional centralized approach: only BTC or ETH in custodial wallets.
+3. **Unified Margin**  
+   - Although Deribit does margin for futures and options, it’s still centralized logic. DeFi might unify margin across multiple protocols with real-time checks on everything from AMM LP positions to staked governance tokens.
 
-2. **Composability**  
-   - Lacks the ability to automate multi-step operations (e.g., borrow -> hedge -> yield farm) in a single transaction.  
-   - No resource-oriented system like Cadence that enforces how assets move atomically within the same environment.
+### **Ideas / Suggestions (Drawing from This UI)**
 
-3. **Unified Margin Across Multiple Instruments**  
-   - While Deribit does some margining across options/futures, it’s not as flexible as a DeFi platform might be (e.g., using multiple DeFi protocols to cross-collateralize).
+1. **Flow-Based Unified Dashboard**  
+   - Present user’s staked Flow, LP tokens, borrowed stablecoins, and any open derivatives positions in one place.  
+   - Each asset is a “resource” in Cadence, making movements explicit and safe.
 
----
+2. **Interactive Hot Panel**  
+   - Show “hottest” DeFi pools, top lending APYs, or trending option strikes, all referencing on-chain data in real time.  
+   - Encourages user exploration without leaving the main dashboard.
 
-### Ideas / Suggestions (Drawing From This UI)
+3. **Atomic Onboarding**  
+   - A single “Start Trading” transaction could deposit collateral, open an option or future, and sign the user up for a yield aggregator.  
+   - Eliminates friction from multiple sign-ups or bridging steps.
 
-1. **Integrated Dashboard on Flow**  
-   - A Flow-based dashboard could similarly present a consolidated view of all positions (lending, AMMs, derivatives) in one place.  
-   - Users could see staked tokens, LP tokens, and borrowed assets alongside their net account value.
-
-2. **Expand Collateral Types**  
-   - Enable staked ETH, yield-bearing tokens (e.g., from AMMs), or even NFT-based collateral.  
-   - Provide real-time margin checks with lower block times on Flow.
-
-3. **Atomic Strategies**  
-   - Use Cadence to combine multiple steps (e.g., open a position in an options protocol, simultaneously supply collateral to a Flow EVM lending market) under one transaction.  
-   - Could replicate or enhance Deribit’s user experience with more DeFi-like flexibility.
-
-4. **Dynamic “What’s Hot” Panel for DeFi**  
-   - Display top-yielding LP pools, highest APY lending pools, or trending option strikes from a Flow-based derivatives protocol.
+### **Comparisons / Where It Could Go**
+- **Compared to Deribit**: A Flow EVM interface could replicate this minimal, accessible style but display DeFi positions, yield accrual, and resource-based security.  
+- **Potential Next Steps**: Build a “Flow DeFi Dashboard” that merges lending, options, yield-farming, and aggregator stats in an all-in-one layout with resource-driven security.
 
 ---
 
-### Comparisons / Where It Could Go
-
-- **Compared to Deribit**: A Flow-based options or futures platform could match Deribit’s intuitive interface but also incorporate staked collateral, cross-protocol margining, and automated liquidation triggers via Cadence.  
-- **Potential Next Steps**: Build a “Flow Deribit” prototype that supports non-linear payoffs (e.g., power perpetuals) or perpetual options, all orchestrated in a single environment.
-
-# Platform: Deribit
-
-## Screenshot 2
-**Image**  
+## **Screenshot 2**  
+**Title**: *Deribit Account Summary & Margin Table*  
+**Reference**:  
 ![Screenshot 2 – Deribit Margin & Options](DeFi-Platforms-Comparison/Deribit-Account-Summary.png)
 
----
+### **Observations / Commentary**
 
-### Observations / Commentary
+1. **Segregated vs. Cross Margin**  
+   - Shows columns for each asset (BTC, ETH, SOL, XRP, etc.) with Equity, PnL, Fee Balance, “Gamma,” “Vega,” “Theta,” and other risk parameters.  
+   - The right side has Margin Balance, Available Balance, IM (Initial Margin), and MM (Maintenance Margin) projected.
 
-1. **Account Summary & Segregated Values**  
-   - Shows a table of each asset (BTC, ETH, SOL, XRP, MATIC, etc.), alongside columns for equity, PNL, fee balance, and **“Greek” metrics** (Gamma, Vega, Theta).  
-   - The rightmost columns track Margin Balance, Available Balance, Initial Margin (IM) projected, and Maintenance Margin (MM) projected.  
+2. **Real-Time Margin Model**  
+   - Deribit updates margin requirements based on your open positions and Greeks. For example, if your overall Delta or Vega is large, margin usage can spike.  
+   - Offers partial cross margin across instruments but remains within Deribit’s closed ecosystem.
 
-2. **Advanced Margining**  
-   - Deribit segregates collateral per asset and displays cumulative margin usage.  
-   - Highlights a sophisticated margin model that calculates real-time requirements based on open positions and Greeks.  
+3. **Tabbed Expiries at the Bottom**  
+   - Quick access to options or futures for each expiry date. Users can see open interest, mark prices, etc.  
+   - The current underlying is around \$91,320 (for BTC), illustrating high crypto price volatility if this is a far-future date.
 
-3. **Available Options**  
-   - At the bottom, a tabbed interface for different expiry dates (09 MAR 25, 11 MAR 25, etc.) and a real-time order book for calls/puts.  
-   - Underlying is listed at **\$91,320.84** with **Time to Expiry** for each contract.  
+4. **Visibility of “Available Balance”**  
+   - Tells the user how much collateral remains for new trades.  
+   - The system notifies you if your margin is insufficient for further positions.
 
-4. **Cross vs. Isolated Values**  
-   - The platform shows “Segregated values” (per asset) and “Cross values.” This indicates how different positions might share margin across instruments.  
-   - The “Margin Balance” and “Available Balance” columns reflect how much of each asset’s equity is allocated to open trades.
+### **What It Has**
 
----
+- **Sophisticated Margin Table**: Summaries for each asset plus real-time risk metrics (Gamma, Vega, Theta, etc.).  
+- **Integrated Option Expiries**: Directly from the bottom panel, bridging margin info to actual trading.  
+- **Detailed Projected Maintenance Margin**: Minimizes margin call surprises by anticipating near-future changes.
 
-### What It Has
+### **What Might Be Missing (Compared to a DeFi Perspective)**
 
-- **Detailed Margin & Greek Breakdown**  
-  - Gamma, Vega, Theta, Delta projections give a near-professional approach to risk management.  
+1. **Composable Cross-Margin**  
+   - This margin system only covers Deribit’s platform. DeFi could unify margin across different protocols: lending, AMM, yield aggregator, etc.  
+   - Real-time cross-protocol margin is more powerful but also more complex.
 
-- **Multiple Expiry Selections**  
-  - A variety of expiries for BTC options, with real-time bid/ask and implied volatility.  
+2. **Yield-Bearing or Staked Collateral**  
+   - All listed assets are base cryptos or stablecoins. No mention of interest-earning positions.  
+   - In DeFi, your collateral might be continuously accruing yield while also backing an options or futures position.
 
-- **Projected Maintenance Margin**  
-  - A direct readout of potential margin calls if positions shift.  
+3. **On-Chain Risk Transparency**  
+   - The “Gamma,” “Vega,” and “Theta” data is generated off-chain. A DeFi approach might allow anyone to verify or recalculate these risk metrics from on-chain transactions or oracles.
 
----
+### **Ideas / Suggestions (Drawing from This UI)**
 
-### What Might Be Missing (Compared to a DeFi Perspective)
-
-1. **Staked Token Collateral**  
-   - All collateral is base assets (BTC, ETH, USDC, etc.). There’s no use of yield-bearing or staked tokens.  
-
-2. **Composable Cross-Protocol Margin**  
-   - This system only accounts for Deribit’s internal positions. DeFi can unify margin across lending, AMMs, options, etc. in one environment.  
-
-3. **On-Chain Visibility**  
-   - Values, positions, and margin calculations are hidden behind centralized logic. In DeFi, real-time on-chain data can be more transparent.  
-
----
-
-### Ideas / Suggestions (Drawing From This UI)
-
-1. **On-Chain Greek Calculations**  
-   - A Flow-based protocol could similarly compute Greeks on-chain (or via oracles) for user positions, giving advanced risk metrics.  
+1. **On-Chain Greek Calculators**  
+   - A Flow-based protocol could similarly compute Greeks on-chain (or via oracles) for user positions, giving advanced risk metrics.
 
 2. **Cross-Asset & Cross-Protocol Margin**  
    - In a Flow DeFi system, margin usage could factor in multiple protocols: e.g., a user’s borrowed USDC, staked ETH, and an AMM LP position.  
-   - Cadence could orchestrate real-time margin checks across these protocols to handle partial unwinds or top-ups automatically.  
+   - Cadence could orchestrate real-time margin checks across these protocols to handle partial unwinds or top-ups automatically.
 
 3. **Composite Collateral**  
    - Users could pledge staked tokens or LP tokens as collateral while earning yield.  
-   - Margin is dynamically adjusted by a central manager contract or aggregator that monitors the user’s net liquidity across the ecosystem.  
+   - Margin is dynamically adjusted by a central manager contract or aggregator that monitors the user’s net liquidity across the ecosystem.
 
 4. **Greek-Driven Liquidation Logic**  
    - In a resource-based system, if a user’s “Delta Total (Projected)” crosses a threshold, the system could automatically execute a partial liquidation to reduce risk.  
    - Could be done atomically through Cadence transactions without manual intervention.
 
----
-
-### Comparisons / Where It Could Go
-
+### **Comparisons / Where It Could Go**
 - **Compared to Deribit**  
   - A Flow DeFi platform can match Deribit’s robust margin model but extend it to unique collateral types and multi-protocol exposure.  
   - Transparent on-chain data for Greeks, margin usage, and liquidation thresholds could build trust and reduce opaqueness.
@@ -350,74 +331,60 @@ By combining proven DeFi building blocks with Flow’s unique technology, the ec
   - Implement a multi-protocol margin aggregator on Flow EVM, using Cadence to track user positions across lending pools, AMMs, and derivative contracts.  
   - Offer advanced data analytics, including Greeks, while letting users supply staked collateral and remain eligible for auto-liquidation triggers.
 
-# Platform: Deribit
+---
 
-## Screenshot 3
-**Image**  
+## **Screenshot 3**  
+**Title**: *BTC Perpetual Trading Interface*  
+**Reference**:  
 ![Screenshot 3 – BTC Perpetual Trading Interface](DeFi-Platforms-Comparison/Deribit-Futures.png)
 
----
+### **Observations / Commentary**
 
-### Observations / Commentary
+1. **Real-Time Chart & Order Book**  
+   - Classic candlestick chart with volume, plus an order book showing live bids/asks.  
+   - Shows a “Funding/8h” rate typical of perpetual swaps.
 
-1. **BTC-PERPETUAL Chart & Order Book**  
-   - A real-time price chart for BTC perpetual swaps, including typical candlestick visuals, trading volume, and technical indicators.  
-   - The order book shows live bids/asks, trade sizes, and recent trades on the right panel.
+2. **Leverage & Order Parameters**  
+   - Users can toggle “Market,” “Limit,” “Post-Only,” “Reduce-Only,” as well as set **Leverage** up to x50.  
+   - Possibly combined with “Take Profit” or “Stop Loss” in one order form.
 
-2. **Futures/Perpetual Swap Features**  
-   - Users can select **Order Form** options: Limit, Market, Post-only, Reduce-only, etc.  
-   - Includes fields for leverage (“Max Leverage x50”) and advanced parameters like Take Profit and Stop Loss in the same interface.
+3. **Perpetual Swap Premium**  
+   - “Premium” indicates whether the perpetual is trading above or below the spot index.  
+   - Funding is paid or received depending on which side you’re on if the market trades off-index.
 
-3. **Funding & Premium**  
-   - Displays a “Funding/8h” rate, typical for perpetual futures to maintain the contract price close to the index.  
-   - “Premium” metric indicates how much higher or lower the perpetual is trading relative to the spot price.
+### **What It Has**
 
----
+- **Deep Liquidity**: A central order book with presumably high trade volumes for BTC.  
+- **Advanced Execution**: Built-in parameter toggles, advanced orders, and partial or full position closing.
 
-### What It Has
-
-- **Live Candlestick Chart** with standard TA overlays.  
-- **Deep Liquidity & Frequent Trades** in the order book.  
-- **Flexible Order Settings** such as stop loss, take profit, and post-only orders.
-
----
-
-### What Might Be Missing (Compared to a DeFi Perspective)
+### **What Might Be Missing (Compared to a DeFi Perspective)**
 
 1. **Collateral Diversity**  
-   - Still restricted to BTC/ETH or stablecoins for margin.  
-   - DeFi could allow staked tokens, yield-bearing assets, or LP tokens as collateral.
+   - Again, just base assets like BTC or ETH. In DeFi, you could deposit staked ETH or stablecoins from a lending pool to go long or short.
 
-2. **Composability**  
-   - In a decentralized environment, traders might seamlessly borrow stablecoins from one protocol, hedge with a perpetual on another, and stake surplus liquidity elsewhere—all from one interface or atomic transaction.
+2. **Permissionless Trading**  
+   - Deribit is custodial and centralized. A DeFi solution would keep user funds in user-controlled wallets.
 
-3. **Permissionless/On-Chain Transparency**  
-   - Order book and matching engine are internal to Deribit, limiting the trustless aspect.  
-   - A DeFi environment might use an AMM-based perpetual model or an on-chain order book for full transparency.
+3. **Composability**  
+   - No direct way to feed this perpetual position as collateral for an option, or vice versa, in the same atomic flow.
 
----
+### **Ideas / Suggestions (Drawing from This UI)**
 
-### Ideas / Suggestions (Drawing From This UI)
-
-1. **AMM-Based Perpetuals on Flow**  
-   - Instead of an off-chain order book, a smart-contract AMM (similar to dYdX or GMX) could track perpetual swaps.  
+1. **AMM or Hybrid Perpetual DEX**  
+   - Flow EVM could support an AMM-based model (like GMX or dYdX’s approach on L2) with on-chain matching.  
    - Cadence could enforce margin checks and handle funding payments automatically.
 
-2. **Direct Integration of Hedging/Leverage Steps**  
-   - A user might borrow stablecoins and instantly open a leveraged short or long in a single transaction.  
-   - Could replicate a similar UI but with direct references to on-chain vaults and positions.
+2. **Atomic Borrow & Perpetual**  
+   - A user might borrow stablecoins from a Flow lending protocol, then open a short or long in one transaction.
 
-3. **Customizable Funding Rates**  
-   - Flow-based perpetuals could adopt flexible or dynamic funding rates that users can see/update on-chain, ensuring more transparent or community-governed parameters.
+3. **Customizable On-Chain Funding**  
+   - The funding rate might be decided by a DAO or automatically adjusted if an on-chain index deviates from the perp’s price.
 
 4. **Combine with Option Positions**  
    - Some DeFi protocols let users run a “perp + option” strategy in one place.  
    - Could set up a transaction where the user simultaneously opens a perp position and sells a covered call, with margin managed in a single Cadence-based flow.
 
----
-
-### Comparisons / Where It Could Go
-
+### **Comparisons / Where It Could Go**
 - **Compared to a DeFi Perp DEX**  
   - Deribit’s UI is streamlined for professional traders, but DeFi can unify multiple protocols (lending, yield, options) behind the scenes.  
   - On-chain, all actions are transparent and verifiable, which can build trust among users who are wary of centralized matching engines.
@@ -428,131 +395,88 @@ By combining proven DeFi building blocks with Flow’s unique technology, the ec
 
 ---
 
-# Platform: Deribit
-
-## Screenshot 4
-**Image**  
+## **Screenshot 4**  
+**Title**: *BTC Options Chain*  
+**Reference**:  
 ![Screenshot 4 – BTC Options Chain](DeFi-Platforms-Comparison/Deribit-Options-Book.png)
 
----
+### **Observations / Commentary**
 
-### Observations / Commentary
+1. **Classic Options Chain**  
+   - Strikes listed down the middle, calls on the left, puts on the right.  
+   - Shows Delta, IV, Bid/Ask for each side, plus an aggregated Mark.
 
-1. **BTC Options Chain View**  
-   - Displays a traditional options chain for the **26 Dec 2025** expiry.  
-   - Strikes are listed in the central column, with Calls on the left (Delta, IV, Bid/Ask) and Puts on the right (IV, Bid/Ask).  
-   - Real-time mark prices, implied volatilities, and open interest/position data are visible.
+2. **Tabbed Expiries**  
+   - Users can quickly jump between different maturity dates.  
+   - Could see how IV or open interest changes across the term structure.
 
-2. **Comprehensive Option Details**  
-   - Columns include `Δ|Delta`, `Size`, `IV Bid`, `Bid`, `Mark`, `Ask`, `IV Ask`, etc.  
-   - The underlying future price is shown at **\$91,301.12**, with time to expiry listed as **292d 15h 46m**.
+3. **Implied Volatility Display**  
+   - Each strike has an associated implied volatility. This is presumably recalculated off-chain by Deribit’s engine.  
+   - Vital for options traders deciding which strike to buy or sell.
 
-3. **Tabbed Expiries**  
-   - Multiple expiry dates (09 MAR 25, 11 MAR 25, etc.) are selectable at the top, making it easy to switch between chains.
+### **What It Has**
 
-4. **Greek & Volatility Snapshot**  
-   - The chain highlights implied volatility for both calls and puts, providing a snapshot of expected price movement.  
-   - Traders can quickly compare how volatility changes across strikes and maturities.
+- **Pro-Level Interface**: Similar to CME or standard equities option chain.  
+- **Real-Time Bids & Asks**: For each strike, letting traders see the liquidity and potential slippage.  
+- **Flexible Expiries & Underlying**: Could be BTC or ETH with multiple monthly or quarterly expiries.
 
----
-
-### What It Has
-
-- **Robust, Professional-Style Options Chain**  
-  - Similar to a traditional brokerage or institutional options platform.  
-- **Live Data** for each strike/expiry: implied volatility, bid/ask, mark, position size, etc.  
-- **Ease of Comparison**: Calls and puts shown side by side around the current underlying price.
-
----
-
-### What Might Be Missing (Compared to a DeFi Perspective)
+### **What Might Be Missing (Compared to a DeFi Perspective)**
 
 1. **On-Chain Options Settlement**  
-   - Deribit centrally clears these options, whereas a DeFi solution would handle margining and final settlement on-chain.  
-   - No direct use of staked or yield-bearing tokens as collateral for options.  
+   - Settlement is entirely reliant on Deribit’s central matching engine and final price feeds.
 
-2. **Automated Option Strategies**  
-   - Traders must manually structure spreads (e.g., straddles, strangles, covered calls), whereas DeFi can offer vaults or smart contracts that automate multi-leg strategies with atomic execution.  
+2. **Composability / Multi-Leg**  
+   - While you can do multi-leg, it’s still under Deribit’s closed environment. DeFi might unify multiple positions across lending/AMMs.
 
-3. **Atomic Position Combining**  
-   - In DeFi, it’s possible to combine an options position with a lending or AMM liquidity position, all in one transaction, thanks to composability.
+3. **Staked Collateral**  
+   - No direct usage of yield tokens or NFT-collateral for writing options.
 
----
-
-### Ideas / Suggestions (Drawing From This UI)
+### **Ideas / Suggestions (Drawing from This UI)**
 
 1. **Flow EVM Option Protocol**  
-   - Present a similarly detailed chain with real-time implied vol, calls, puts, and various expiries.  
-   - Settlement and margin would be managed on-chain, with transparent, trustless execution.
+   - Replicate or surpass the chain approach, but settlement and margin are on-chain.  
+   - Could incorporate oracles for implied volatility or use an AMM-like pool for option liquidity (like Hegic or Lyra on other chains).
 
-2. **Composability with Yield Tokens**  
-   - Traders might deposit yield-bearing assets (e.g., staked ETH) as collateral, simultaneously earning staking rewards while writing options.  
-   - Could revolve around a Cadence-based system that automatically exercises or rolls options if certain conditions are met.
+2. **Advanced Automated Strategies**  
+   - DeFi might let you build a “covered call vault” that sells calls against a staked asset, distributing premium to depositors.  
+   - In a single transaction, a user deposits tokens, a contract sells calls weekly, and the yield is auto-compounded.
 
-3. **Multi-Leg / Strategy Vaults**  
-   - Offer “one-click” strategies (covered calls, bull call spreads, iron condors) that orchestrate multiple option legs plus collateral deposit in a single transaction.  
-   - Cadence ensures resource safety, so partial execution doesn’t leave leftover tokens or incomplete legs.
-
-4. **Integration with Perpetuals**  
-   - A user could open a perpetual short on BTC to hedge delta, while selling calls in the same transaction.  
-   - DeFi can unify these steps into a single, atomic flow, potentially improving capital efficiency.
+3. **Strike Groupings or Liquidity Pools**  
+   - Instead of a pure order book, some DeFi options revolve around liquidity pools that cover multiple strikes.  
+   - This can be simpler for new users but requires complex risk management.
 
 ---
 
-### Comparisons / Where It Could Go
-
-- **Compared to Deribit**  
-  - A DeFi-based chain replicates advanced features like implied volatility, real-time bid/ask, and a professional UI, but also integrates with a broader ecosystem of lending, staking, and AMMs.  
-  - Settlement, margin, and collateral would all be on-chain, offering transparency and composability.
-
-- **Potential Next Steps**  
-  - Develop an on-chain options protocol on Flow EVM with robust margin management, enabling advanced strategies like covered calls on staked assets.  
-  - Include a user-friendly interface that displays live implied vol, open interest, and other metrics directly from on-chain data or oracles.
-
----
-
-# Platform: Deribit
-
-## Screenshot 5
-**Image**  
+## **Screenshot 5**  
+**Title**: *Deribit Option Order Form*  
+**Reference**:  
 ![Screenshot 5 – Deribit Option Order Form](DeFi-Platforms-Comparison/Deribit-Place-Options-Order.png)
 
----
+### **Observations / Commentary**
 
-### Observations / Commentary
+1. **Limit/USD/IV Pricing**  
+   - Users can place an order by specifying a limit price in BTC, or directly in USD, or by desired implied volatility.  
+   - This is a high-level feature for advanced traders who target an IV rather than a direct price.
 
-1. **Option Order Form**  
-   - The interface shows a **Call** option for 26 Dec 2025 with a strike at 90,000 BTC.  
-   - Users can specify the order type (Limit / USD / IV) and quantity in BTC.  
-   - Real-time stats: Mark price, future mark, 24h volume, and various Greeks (Lambda, etc.) are visible on the right.
+2. **Buy vs. Sell Margin**  
+   - The form shows how much margin is needed if you buy (debit risk) vs. sell (credit risk).  
+   - Also can see “Position MM Impact” to reflect how it changes your overall margin.
 
-2. **Margin & Position Info**  
-   - “Buy Margin” and “Sell Margin” indicate how much BTC is needed as collateral for each side of the trade.  
-   - “Position MM impact” can be calculated to see how margin changes once the user takes a position.
+3. **Greeks Panel**  
+   - Displays Greeks (Delta, IV, etc.) in real time, plus a Mark Price, future mark, 24h volume, and Lambda.  
+   - Traders can decide if the contract is overpriced or underpriced relative to its implied volatility.
 
-3. **Greeks Panel & Bid/Ask Spread**  
-   - Shows individual quotes for different quantities, with columns for IV, bid/ask, and implied USD price.  
-   - The Greeks (Delta, IV, etc.) help users gauge option pricing and risk.
+### **What It Has**
 
-4. **Customizable Execution Types**  
-   - Toggle between “Limit,” “Advanced” (like USD or IV-based entry), or “GTC” (Good ‘Til Canceled).  
-   - Can reduce position size, post-only, or adjust order validity directly from this module.
+- **Rich Order Entry**: Multiple ways to define an order, from price-based to volatility-based.  
+- **Immediate Margin Calculation**: Minimizes guesswork for how much BTC or ETH you must lock up.  
+- **Greeks Integration**: Nudges traders to consider how each position adds or reduces risk.
 
----
+### **What Might Be Missing (Compared to a DeFi Perspective)**
 
-### What It Has
-
-- **Comprehensive Option Parameters**: Users can price their trades in terms of BTC, USD, or implied volatility.  
-- **Margin Calculation**: Built-in margin estimation for both buy and sell side.  
-- **Detailed Contract Specs**: Mark Price, Index, and contract expiry info all in one place.
-
----
-
-### What Might Be Missing (Compared to a DeFi Perspective)
-
-1. **On-Chain Collateral Diversity**  
-   - Still BTC-based margin. In DeFi, staked or tokenized collateral can be used for options.  
-   - No direct synergy with yield tokens or cross-protocol positions.
+1. **Collateral Token Diversity**  
+   - Only BTC margin. DeFi might allow staked ETH, stablecoins, or even yield tokens.  
+   - No synergy with cross-protocol positions.
 
 2. **Atomic Multi-Leg Orders**  
    - Traders must open individual positions manually. DeFi could allow bundling multiple option legs plus collateral deposit in one transaction.
@@ -560,9 +484,7 @@ By combining proven DeFi building blocks with Flow’s unique technology, the ec
 3. **Automation / Smart Vaults**  
    - In DeFi, vault strategies might automatically roll expiring options or adjust strike prices based on user preferences.
 
----
-
-### Ideas / Suggestions (Drawing From This UI)
+### **Ideas / Suggestions (Drawing from This UI)**
 
 1. **IV-Based Order Placement in DeFi**  
    - A Flow-based options protocol could let users specify an implied volatility target rather than just a price.  
@@ -576,153 +498,91 @@ By combining proven DeFi building blocks with Flow’s unique technology, the ec
    - Saves users from manual overhead and mitigates risk of forgetting to roll.
 
 4. **Collateral Token Selection**  
-   - At the order form level, let users pick from a list of whitelisted or yield-bearing collateral tokens.  
+   - Let users pick from a list of whitelisted or yield-bearing collateral tokens.  
    - The UI shows margin calculations for each collateral type, factoring in staked yields or token conversion rates.
 
 ---
 
-### Comparisons / Where It Could Go
-
-- **Compared to Deribit**  
-  - Similar UI possible on Flow EVM, but margin, settlement, and oracles would be on-chain.  
-  - Users can incorporate non-traditional collateral, automated multi-step flows, and yield-bearing strategies.
-
-- **Potential Next Steps**  
-  - Design a DeFi options DApp with an equally robust order form and real-time margin/Grek monitoring.  
-  - Integrate staked or LP token collateral, letting users earn passive yield while trading options in a single, resource-oriented transaction.
-
----
-
-# Platform: Deribit
-
-## Screenshot 6
-**Image**  
+## **Screenshot 6**  
+**Title**: *Option Contract Details*  
+**Reference**:  
 ![Screenshot 6 – Deribit Option Contract Details](DeFi-Platforms-Comparison/Deribit-Options-Contract-Details.png)
 
----
+### **Observations / Commentary**
 
-### Observations / Commentary
+1. **Contract Specs**  
+   - Mark Price, Price Source (Deribit BTC Index), Contract Size, Min Order Size, Tick Size, Settlement Currency, Expiry Date.  
+   - All visible in one panel before execution.
 
-1. **Detailed Contract Specifications**  
-   - Provides **Mark Price**, **Price Source** (Deribit BTC Index), **Contract Size** (1 BTC), **Min Order Size**, **Tick Size**, and **Expiration Type** (Quarterly).  
-   - Users can see exact settlement currency (BTC), expiry date (26 Dec 2025), and min/max buy prices.
+2. **Delta, Gamma, Vega, Theta, Rho**  
+   - Each option contract references these Greeks to indicate sensitivity to underlying price, volatility, and time.  
+   - Useful for institutional traders who manage large option books.
 
-2. **Buy vs. Sell Margin**  
-   - Immediately shows how much BTC margin is required to buy or sell the option (`0.0051 BTC` vs. `0.0070 BTC` in this case).  
-   - “Position MM impact” links to further margin impact calculations.
+3. **Margin Requirements**  
+   - Immediate “Buy Margin” vs. “Sell Margin” for each side of the order.  
+   - “Position MM impact” calculates how this contract shifts your margin usage.
 
-3. **Greeks per Contract**  
-   - **Delta**, **Gamma**, **Vega**, **Theta**, **Rho** are listed, letting traders evaluate the option’s sensitivity to market movements and time decay.
+### **What It Has**
 
-4. **Convenient Single-Page Execution**  
-   - The user can check contract details, margin requirements, and real-time order book quotes all in one panel before deciding to buy or sell.
+- **Transparent Contract Terms**: No hidden fees or unlisted tick sizes.  
+- **Unified Interface**: Data about margin, Greeks, and price source are in one location.  
+- **Professional-Grade Metrics**: Greek breakdown is crucial for advanced hedging strategies.
 
----
+### **What Might Be Missing (Compared to a DeFi Perspective)**
 
-### What It Has
+1. **Decentralized Oracle**  
+   - Price data rely on “Deribit BTC Index.” DeFi might use multiple oracles for a trustless final settlement.
 
-- **Clear Visibility** into option parameters and risk metrics.  
-- **Unified Margin & Greeks**: No need to switch screens to calculate margin or check implied volatility.  
-- **Contract Terms**: Transparency about tick sizes, min order sizes, and settlement details.
+2. **Dynamic or Multi-Asset Collateral**  
+   - Not possible to pledge partial stablecoins, partial staked tokens, or partial LP positions.
 
----
+3. **Composability**  
+   - In DeFi, the same user might hold an NFT or staked Flow tokens that also count toward margin in a single resource-oriented system.
 
-### What Might Be Missing (Compared to a DeFi Perspective)
-
-1. **Trustless Settlement**  
-   - Settlement relies on Deribit’s centralized matching engine and reference index.  
-   - In DeFi, the settlement would be on-chain and might use multiple oracles to determine final settlement price.
-
-2. **Custom Collateral Management**  
-   - A DeFi environment could enable multiple or dynamically rebalanced collaterals (e.g., staked tokens plus stablecoins).  
-   - Automated top-ups or partial liquidations if the margin ratio drops below a threshold.
-
-3. **Composability with Other Protocols**  
-   - In DeFi, the same margin/collateral could be simultaneously earning yield in a lending protocol, or used in an LP, while backing an option position.
-
----
-
-### Ideas / Suggestions (Drawing From This UI)
+### **Ideas / Suggestions (Drawing from This UI)**
 
 1. **On-Chain Oracle Aggregation**  
-   - Instead of a single “Deribit BTC Index,” a Flow-based system could reference multiple oracles (Chainlink, Pyth, etc.) to derive a robust settlement price.  
-   - Increases trustlessness and reduces single-point-of-failure risk.
-
+   - Aggregating Chainlink, Pyth, or other feeds for settlement ensures no single point of failure.  
 2. **Collateral Portfolio**  
    - Users might deposit a basket of assets (e.g., staked ETH, stablecoins, Flow tokens) as collateral, with Cadence automatically adjusting the effective margin requirement based on each asset’s volatility.
-
 3. **Risk Dashboard**  
    - A dedicated “Risk” or “Greeks” dashboard that updates in real time across all user positions, integrated with other Flow EVM protocols to show total portfolio risk.
-
 4. **Advanced Expiration Options**  
    - DeFi could experiment with rolling expiries, user-defined settlement windows, or partial expiries not typically offered in centralized platforms.
 
 ---
 
-### Comparisons / Where It Could Go
+## **Screenshot 7 & 8**  
+**Title**: *Option Wizard Setup & Results*  
+**References**:  
+- ![Screenshot 7 – Option Wizard](DeFi-Platforms-Comparison/Deribit-Options-Wizard.png)  
+- ![Screenshot 8 – Option Wizard Example](DeFi-Platforms-Comparison/Derbit-Options-Wizard-Example.png)
 
-- **Compared to Deribit**  
-  - A DeFi platform can replicate Deribit’s clarity on contract details, but settle positions on-chain using decentralized oracles.  
-  - Could unify all user positions (spot, lending, yield tokens, options) in a single margin account for a richer, more efficient user experience.
+### **Observations / Commentary**
 
-- **Potential Next Steps**  
-  - Implement an on-chain options protocol with similarly granular contract specs.  
-  - Offer multi-asset collateral support and dynamic margining, giving DeFi traders more capital flexibility while retaining a professional UI/UX.
+1. **Wizard Approach**  
+   - User enters a target price (e.g., \$200,000), a date (e.g., 26 Dec 2025), and total investment.  
+   - The platform suggests an “optimal strategy” (in the example, a **Long Call**).
 
----
+2. **PnL Chart**  
+   - A line graph shows how PnL evolves if the underlying moves.  
+   - The break-even or payoff is easy to visualize, helping beginners see risk and reward.
 
-# Platform: Deribit
+3. **Expected ROI, PNL, Max Loss**  
+   - The wizard calculates expected ROI% if the underlying hits the user’s forecast.  
+   - Also discloses how much the user stands to lose if the forecast fails.
 
-## Screenshot 7 & 8
-**Images**  
-- *Screenshot 7 – Option Wizard Setup*:  
-  ![Screenshot 7 – Option Wizard](DeFi-Platforms-Comparison/Deribit-Options-Wizard.png)
+4. **Scenario Tool**  
+   - Good for less advanced traders or new crypto investors wanting a guided approach.  
+   - If the user changes the forecast price or date, the wizard re-suggests or updates the strategy.
 
-- *Screenshot 8 – Option Wizard Results*:  
-  ![Screenshot 8 – Option Wizard Example](DeFi-Platforms-Comparison/Derbit-Options-Wizard-Example.png)
+### **What It Has**
 
----
+- **Easy Entry for Beginners**: Minimal knowledge required to get a basic strategy.  
+- **Visual PnL**: Encourages scenario-based thinking, which is especially helpful for options (non-linear payoffs).  
+- **Sharing / Reviewing**: Users can review the strategy or copy a link to share with others.
 
-### Observations / Commentary
-
-1. **Option Wizard Workflow**  
-   - The user enters basic parameters:  
-     1. **Choose currency** (BTC or ETH)  
-     2. **Expected Price** at a future date  
-     3. **Date of Price Expectation**  
-     4. **Total Investment**  
-     5. Click **Calculate Strategy**  
-   - The wizard suggests an “optimal strategy” based on the user’s price forecast and capital.
-
-2. **Profit & Loss Chart**  
-   - A live graph shows the expected PnL at various index prices.  
-   - In Screenshot 8, the chart depicts how profit starts to ramp up past a certain strike (the break-even point for a **long call**).
-
-3. **Strategy Details & Metrics**  
-   - **Expected ROI%**  
-   - **Expected PNL** (in BTC)  
-   - **Expected PNL (USD)**  
-   - **Max Loss** and **Total Investment**  
-   - Users can “Review Order” or copy a strategy link for quick sharing.
-
-4. **Intuitive UI for Non-Experts**  
-   - Simplifies options strategy construction by letting users plug in a price target and date, then automatically generating a recommended trade (in this example, a **Long Call** at 140,000 strike).  
-   - The chart is more visual than a standard option chain, likely appealing to traders who prefer a scenario-based approach.
-
----
-
-### What It Has
-
-- **Scenario-Based Strategy Creation**  
-  - Great for users who know a future price target but are unsure which option strikes or strategies to pick.  
-- **Real-Time PnL Curves**  
-  - Instantly updates potential profit/loss across a range of underlying prices.  
-- **Easy Sharing**  
-  - “Copy Strategy Link” allows traders to share their setup or “wizard” results.
-
----
-
-### What Might Be Missing (Compared to a DeFi Perspective)
+### **What Might Be Missing (Compared to a DeFi Perspective)**
 
 1. **Composability with Other Protocols**  
    - A DeFi “wizard” might let you factor in borrowed assets, staked collateral, or yield farm returns when building an option strategy.  
@@ -736,9 +596,7 @@ By combining proven DeFi building blocks with Flow’s unique technology, the ec
    - In DeFi, a wizard might pull real-time on-chain liquidity metrics, aggregator prices, or oracle-based volatility feeds.  
    - Transparent, trustless data instead of a centralized platform feed.
 
----
-
-### Ideas / Suggestions (Drawing From This UI)
+### **Ideas / Suggestions (Drawing from This UI)**
 
 1. **Scenario Wizards in Flow DeFi**  
    - Create a similar wizard for Flow EVM that helps users pick the best *on-chain* strategy: e.g., “Long Call + Provide Liquidity with Remaining Funds.”  
@@ -756,69 +614,39 @@ By combining proven DeFi building blocks with Flow’s unique technology, the ec
 
 ---
 
-### Comparisons / Where It Could Go
+## **Screenshot 9, 10, 11 & 12**  
+**Title**: *Deribit Combos & Multi-Leg Strategies*  
+**References**:  
+1. ![Screenshot 9 – Strategy Selection (Risk Reversal, etc.)](DeFi-Platforms-Comparison/Derbit-Combos-Example.png)  
+2. ![Screenshot 10 – Combos List Overview](DeFi-Platforms-Comparison/Deribit-Combo-List.png)  
+3. ![Screenshot 11 – Call Condor Creation](DeFi-Platforms-Comparison/Deribit-Custom-Combo-Order.png)  
+4. ![Screenshot 12 – Straddle Setup](DeFi-Platforms-Comparison/Deribit-Straddle-Order.png)
 
-- **Compared to Deribit**  
-  - A DeFi platform can replicate the scenario-based approach while enabling complex multi-leg, multi-protocol strategies.  
-  - Could also leverage lower block times on Flow for near-instant feedback on margin usage, yield rates, or option Greeks.
+### **Observations / Commentary**
 
-- **Potential Next Steps**  
-  - Develop a “Flow Strategy Wizard” that merges derivative positions, lending, and AMM liquidity under one scenario chart.  
-  - Expand the synergy by letting users “batch transact” all steps through Cadence, ensuring atomic execution with minimal friction.
-
----
-
-# Platform: Deribit
-
-## Screenshot 9, 10, 11 & 12
-**Images**  
-1. *Screenshot 9 – Strategy Selection (Risk Reversal, etc.)*  
-   ![Screenshot 9 – Strategy Selection](DeFi-Platforms-Comparison/Derbit-Combos-Example.png)
-
-2. *Screenshot 10 – Combos List Overview (Vertical Spread, etc.)*  
-   ![Screenshot 10 – Combos List](DeFi-Platforms-Comparison/Deribit-Combo-List.png)
-
-3. *Screenshot 11 – Creating a Multi-Leg Combo (Call Condor)*  
-   ![Screenshot 11 – Create Combo](DeFi-Platforms-Comparison/Deribit-Custom-Combo-Order.png)
-
-4. *Screenshot 12 – Another Combo (Straddle)*  
-   ![Screenshot 12 – Straddle Setup](DeFi-Platforms-Comparison/Deribit-Straddle-Order.png)
-
----
-
-### Observations / Commentary
-
-1. **Strategy Templates**  
-   - The drop-down includes pre-labeled combos like **Future Spread**, **Vertical Spread**, **Risk Reversal**, **Call Ratio Spread** (1x2), **Condor**, **Straddle**, etc.  
-   - Gives traders a quick way to assemble complex multi-leg option positions without manually specifying each leg from scratch.
+1. **Pre-Set Strategies**  
+   - Drop-down templates like **Future Spread**, **Vertical Spread**, **Risk Reversal**, **Condor**, **Straddle**, etc.  
+   - Helps advanced traders quickly define multi-leg combos (e.g., +1 Call at strike X, -1 Call at strike Y, etc.).
 
 2. **Combos List**  
-   - Shows multiple “Call spread” or “Put spread” trades, each with specific legs (e.g., +1 BTC-11MAR25-90000-C / -1 BTC-11MAR25-92000-C).  
-   - Bid/Ask columns provide implied prices, so users can gauge the net cost or credit for each multi-leg strategy.
+   - Each combo line item details the legs, amounts, implied bid/ask, net cost/credit, net delta.  
+   - Traders see how each part of the spread contributes to the total margin and payoff.
 
-3. **Create Combo (BTC)**  
-   - Traders can pick a strategy template, choose the expiry, strike(s), and call/put arrangement.  
-   - Fields for “Amount,” “Bid (Implied),” “Mark,” “Ask (Implied)” let users see the potential fill prices for the entire strategy at once.
+3. **Creating a Custom Combo**  
+   - The user can specify up to 4 or more legs in a single ticket (e.g., a Condor with 2 long legs, 2 short legs).  
+   - Straddles involve buying (or selling) both a call and put at the same strike/expiry to bet on volatility.
 
-4. **Straddle / Strangle**  
-   - Buying both a call and put at the same strike/expiry in one interface.  
-   - The platform notes it’s a “volatility trade” – bullish on movement up or down past the combined premium.
+4. **Risk/Reward Unification**  
+   - The interface shows net Greeks across all legs, letting users judge if the position is net long volatility, net neutral, etc.  
+   - Real-time margin changes are displayed as you tweak each leg’s strike or expiry.
 
-5. **Advanced Features**  
-   - Combining multiple options (or futures + options) in a single ticket.  
-   - Includes net Delta, Vega, Theta, Rho calculations for the entire strategy, helping traders assess overall risk.
+### **What It Has**
 
----
-
-### What It Has
-
-- **Pre-Set Strategy Menus**: Risk reversals, condors, straddles, ratio spreads—makes it easy for users to structure multi-leg trades.  
+- **Template Library**: Risk reversals, condors, straddles, ratio spreads—makes it easy for users to structure multi-leg trades.  
 - **Single Order**: Consolidates multiple legs into one transaction, simplifying execution.  
 - **Real-Time Pricing & Greeks**: Shows net Greeks across all legs, plus implied bid/ask for the entire strategy.
 
----
-
-### What Might Be Missing (Compared to a DeFi Perspective)
+### **What Might Be Missing (Compared to a DeFi Perspective)**
 
 1. **Cross-Protocol Composability**  
    - DeFi could integrate multiple protocols in one strategy (e.g., lend stablecoins, use the interest to offset the premium for an options spread).  
@@ -830,12 +658,10 @@ By combining proven DeFi building blocks with Flow’s unique technology, the ec
 3. **Atomic Execution Across Different Contract Types**  
    - With Cadence, you could combine an options combo, a perpetual hedge, and a lending action in a single atomic transaction, which Deribit cannot offer as a centralized platform.
 
----
+### **Ideas / Suggestions (Drawing from These Screens)**
 
-### Ideas / Suggestions (Drawing From This UI)
-
-1. **Multi-Protocol “Combo Builder” in DeFi**  
-   - A “Create Combo” panel that goes beyond option legs—allow the user to add a step for borrowing, a step for providing liquidity in an AMM, and final steps for multi-leg options, all orchestrated via Cadence.
+1. **Multi-Protocol “Combo Builder”**  
+   - Let the user define a 4-leg option spread on one protocol plus a stablecoin borrow on another plus a yield deposit on a third. All orchestrated via Cadence.
 
 2. **Template Library for “Exotic” Strategies**  
    - In addition to risk reversals and condors, a DeFi UI could integrate power perpetuals, perpetual options, or yield tokens into the combos.  
@@ -851,14 +677,348 @@ By combining proven DeFi building blocks with Flow’s unique technology, the ec
 
 ---
 
-### Comparisons / Where It Could Go
+## **Black–Scholes On-Chain: Key Considerations**
 
-- **Compared to Deribit**  
-  - A DeFi-based “Combo” system can replicate the convenience of multi-leg strategies but broaden the scope to nontraditional collateral, yield integration, and cross-protocol synergy.  
-  - Execution is trustless and on-chain, giving users full transparency and ownership.
+Deribit’s **option pricing and Greeks** (Delta, Gamma, Vega, Theta, Rho) rely on a **Black–Scholes-like model** running on Deribit’s servers. In a DeFi environment on Flow EVM:
 
-- **Potential Next Steps**  
-  - Build a “Flow Strategy Combos” module that seamlessly bundles multiple legs from a Flow EVM options protocol plus interactions with lending or AMM platforms.  
-  - Provide advanced risk management with on-chain oracles, automated partial liquidations, and yield accrual for collateral.
+1. **On-Chain vs. Off-Chain**  
+   - True on-chain Black–Scholes for every strike could be **gas-intensive**.  
+   - A common approach is to run vol and Greek computations off-chain, then push updated implied vol surfaces to a smart contract via oracles or keepers.
+
+2. **Frequent Updates**  
+   - Option pricing changes as the underlying price and time to expiry shift.  
+   - Deribit updates it in real-time; a DeFi protocol might rely on oracles that update every minute or on demand. If data is stale, pricing might become inaccurate.
+
+3. **Settlement & Final Price**  
+   - You also need an **underlying price** at expiry. Typically, a **Chainlink** or **Pyth** feed is used.  
+   - The protocol must define how to handle extreme events or oracle failures.
+
+4. **Resource-Oriented Implementation**  
+   - Cadence can handle the logic for transferring option tokens (representing a specific strike/expiry) and ensuring they are “burned” upon exercise.  
+   - The actual Black–Scholes math can be simplified or partially offloaded to an external aggregator that posts final quotes or greeks.
+
+5. **Potential Approaches**  
+   - **AMM Option Models** (e.g., Lyra, Premia) bypass the need for a full order book and do simpler on-chain computations with an implied vol parameter.  
+   - **Hybrid Oracle**: Keep a table of implied vol for each strike/expiry, updated by “vol keepers.” Each user can open or close positions at those posted vol levels.  
+   - **Dispute or Slashing**: If keepers post incorrect vol, a dispute mechanism might slash staked collateral.
 
 ---
+
+## **Consolidated Takeaways for a Flow EVM DeFi Platform**
+
+- **Collateral Diversity**: Let staked tokens, yield tokens, or NFT-based positions serve as margin.  
+- **Cross-Protocol Composability**: A single user transaction can borrow stablecoins, open an option spread, and deposit leftover in an AMM.  
+- **Trustless Settlement**: On-chain oracles for underlying price and volatility data, reducing reliance on a single centralized feed.  
+- **Atomic Multi-Step Execution**: Cadence can ensure a partial fail reverts the entire transaction, preventing leftover half-positions or stranded collateral.  
+- **Optional Off-Chain Computation**: For advanced greeks or vol surfaces, consider external keepers or oracles.  
+- **Strategy Templates & Wizards**: Replicate Deribit’s wizard approach, but let users add steps from other DeFi protocols in a single “combo” workflow.
+
+By combining the best elements of Deribit’s UI/UX (option chain clarity, multi-leg combos, margin analytics) with Flow EVM’s resource-oriented approach, you can build a robust, user-friendly derivatives platform—**all while harnessing the composability, transparency, and potential yield synergy unique to DeFi**.
+
+---
+
+### **Next Steps**
+After reviewing this consolidated Deribit overview, the next stage could be examining **Deri.io** or other platforms (featuring perpetual options, power perpetuals, or “pure gamma” trades), then exploring how those innovations fit into Flow EVM and Cadence.
+
+
+# Platform: DERI.IO
+
+DERI.IO is a non-custodial (on-chain) derivatives platform that supports **Futures**, **Perpetual Options**, **Power Perpetuals**, and **Gamma Swap**. It currently runs on several L2 chains, but in principle could deploy to Flow EVM. Below is a **merged and detailed** document covering all of DERI.IO’s key features—Futures, Perpetual Options, Power Perpetuals, and Gamma Swap—along with suggestions for how a **Flow EVM + Cadence** environment could integrate or improve upon them.
+
+---
+
+## **Futures: Trading Interface & Dashboard**
+
+### **Screenshot 1 & 2**  
+**Title**: *DERI.IO Futures Trading Interface*  
+**References**:  
+1. ![Screenshot 1 – DERI.IO Futures](DeFi-Platforms-Comparison/Deri-Io-Futures.png)  
+2. ![Screenshot 2 – DERI.IO Futures Pairs](DeFi-Platforms-Comparison/Deri-Io-Futures-Offerings.png)
+
+**Observations / Commentary**  
+1. **On-Chain & Non-Custodial**:  
+   - Integrates with a Web3 wallet on L2. Users have full custody except when margin is locked in a smart contract.  
+2. **Account Info & Margins**:  
+   - Displays “Dynamic Balance,” “Locked Margin,” “Available Margin.” Users can **Deposit** or **Withdraw** on-chain.  
+3. **Chart & Price Data**:  
+   - Shows **Mark Price**, **Index Price**, daily funding, net position, and pool utilization.  
+4. **Trading Controls**:  
+   - **Buy / Sell** tabs: Market, Limit, Stop. Volume toggles between BTC or USD. Quick margin shortcuts (25%, 50%, 75%, 100%).  
+5. **Futures Pair Selection**:  
+   - Multiple pairs: BTCUSD, ETHUSD, BNBUSD, SOLUSD, etc. with real-time price changes.  
+6. **Positions & Orders**:  
+   - “Positions,” “Open Orders,” and “History” tabs. Empty if no current trades.
+
+**What It Has**  
+- On-chain futures, user-friendly UI, quick pair switching, margin/funding stats.
+
+**What Might Be Missing (Flow EVM + Cadence)**  
+1. **Resource-Oriented Atomicity**:  
+   - Could unify deposit → trade → leftover yield deposit in one transaction.  
+2. **Wider Composability**:  
+   - Integrations with AMMs, lending, or cross-protocol margin aggregator.  
+3. **Automated Strategy Vaults**:  
+   - For auto-rebalancing, partial liquidation, cross-protocol hedging.  
+4. **Expanded Collateral Types**:  
+   - Flow EVM might allow staked FLOW, NFTs, or yield-bearing tokens as margin.
+
+**Ideas / Suggestions**  
+1. **Flow EVM Integration**:  
+   - Deploy DERI on Flow EVM for fast finality and Cadence-based transactions.  
+2. **Cross-Protocol Margin Aggregator**:  
+   - Combine user’s entire portfolio for robust risk management.  
+3. **Combined Lending/Futures**:  
+   - Borrow stables from a Flow dApp, open a leveraged futures position, deposit leftover in a yield aggregator.  
+4. **Vault Strategies**:  
+   - Auto-manage funding or partial liquidations.
+
+**Comparisons / Where It Could Go**  
+- Non-custodial vs. CEX. Flow EVM synergy can unify advanced on-chain steps.  
+- Potentially integrate oracles, expand to staked tokens, build advanced UI with Cadence atomic actions.
+
+---
+
+## **Perpetual Options**
+
+### **Screenshot 3, 4, 5 & 6**  
+**Title**: *DERI.IO Perpetual Options Interface*  
+**References**:  
+1. ![Screenshot 3 – BTCUSD-70000-C Overview](DeFi-Platforms-Comparison/Deri-Io-Options.png)  
+2. ![Screenshot 4 – Option Symbols/Strikes](DeFi-Platforms-Comparison/Deri-Io-Options-Offerings.png)  
+3. ![Screenshot 5 – Perpetual Option Calls Table](DeFi-Platforms-Comparison/Deri-Io-Strikes-Funding-Book.png)  
+4. ![Screenshot 6 – Extended Calls Table](DeFi-Platforms-Comparison/Deri-Io-More-Strikes.png)
+
+**Observations / Commentary**  
+1. **Perpetual Options (No Expiry)**:  
+   - e.g. BTCUSD-70000-C. Funding-based structure keeps them alive indefinitely.  
+2. **Dynamic Volatility & Payoff**:  
+   - DVOL measures implied volatility. “Payoff” plus “Daily Funding” displayed.  
+3. **Option-Specific Margin & Funding**:  
+   - Each strike has a separate daily funding rate.  
+4. **Calls & Puts Table**:  
+   - Displays Delta, Net Position, Daily Funding, Mark Price, Strike.  
+5. **Multiple Strikes & Assets**:  
+   - Various call/put strikes for BTC, ETH, SOL, BNB, TON, SUI.  
+6. **Left-Side Buy/Sell**:  
+   - Market/Limit/Stop orders, volume in BTC or USD, quick margin allocations.
+
+**What It Has**  
+- On-chain, indefinite-lifespan options, DVOL tracking, detailed strike table.
+
+**What Might Be Missing (Flow EVM + Cadence)**  
+1. **Resource-Oriented Atomicity**:  
+   - Could deposit margin + buy an option + leftover yield deposit in a single transaction.  
+2. **Cross-Protocol Synergy**:  
+   - Hedge or complement with lending/AMMs in one step.  
+3. **User-Created Strategy Vaults**:  
+   - Auto-rolling or multi-leg combos with minimal friction.  
+4. **Refined Liquidation**:  
+   - Cadence-based partial close if margin is threatened.
+
+**Ideas / Suggestions**  
+1. **Flow EVM Perpetual Options**:  
+   - On-chain, no-expiry calls/puts with a stable funding formula.  
+2. **Power Perpetual & Exotics**:  
+   - Combine with squared payoffs or advanced margin.  
+3. **Atomic Hedge/Deposit**:  
+   - If the option reverts, so does the entire deposit/hedge step.  
+4. **Transparent Funding**:  
+   - Possibly governed by on-chain proposals for rate changes.
+
+**Comparisons / Where It Could Go**  
+- On-chain perpetual options let traders keep keys. Flow EVM offers more advanced composability.  
+- Could tie into a bridging approach from DERI to Flow, or replicate the codebase on Flow with Cadence enhancements.
+
+---
+
+## **Collateral Deposit**
+
+### **Screenshot 7**  
+**Title**: *DERI.IO Account Deposit Modal*  
+**Reference**:  
+![Screenshot 7 – Account Deposit](DeFi-Platforms-Comparison/Deri-Io-Collateral-Deposit.png)
+
+**Observations / Commentary**  
+1. **Collateral Selection**:  
+   - Base Tokens (USDC, ETH, USDT, WBTC), each with an APY shown. Possibly integrated yield.  
+2. **Balance & Withdrawal**:  
+   - “Balance” vs. “Withdrawable,” plus a “Disc. Factor” for haircuts.  
+3. **Deposit Interface**:  
+   - Quick percentage-based deposit amounts (25%, 50%, 75%, 100%).  
+4. **APY Indication**:  
+   - Some tokens have a displayed APY, though details on how it’s earned vary.
+
+**What It Has**  
+- Multi-asset collateral, on-chain deposit, discount factor for risk weighting.
+
+**What Might Be Missing (Flow EVM + Cadence)**  
+1. **Atomic Multi-Step**:  
+   - Single transaction for deposit + open position + leftover yield deposit.  
+2. **Auto-Optimization**:  
+   - Potential aggregator automatically chooses best margin APY.  
+3. **Staked/NFT Collateral**:  
+   - Flow EVM could accept more exotic resource-based collateral.
+
+**Ideas / Suggestions**  
+1. **Enhanced Collateral Manager**:  
+   - Factor in real-time APYs, user preferences, discount factors, rebalancing.  
+2. **Dynamic Rebalancing**:  
+   - Cadence script automatically adjusts user’s margin composition for yield or risk reasons.  
+3. **Composability**:  
+   - Resource-based design can allow new tokens seamlessly if discount factors are set.
+
+**Comparisons / Where It Could Go**  
+- Non-custodial deposit vs. a centralized wallet. Flow can store these as resource transactions for advanced features.  
+- Governance-based discount factor updates on-chain.
+
+---
+
+## **Power Perpetuals (mETH^2, mBTC^2)**
+
+### **Screenshot 8, 9 & 10**  
+**Title**: *Power Perpetual: mETH^2*  
+**References**:  
+1. ![Screenshot 8 – mETH^2 Chart View](DeFi-Platforms-Comparison/Deri-Io-Power-Perpetuals.png)  
+2. ![Screenshot 9 – Powers Menu (mBTC^2, mETH^2)](DeFi-Platforms-Comparison/Deri-Io-Power-Perpetuals-Offerings.png)  
+3. ![Screenshot 10 – Funding Chart for mETH^2](DeFi-Platforms-Comparison/Deri-Io-Power-Perpetual-Funding.png)
+
+**Observations / Commentary**  
+1. **mETH^2 Symbol**:  
+   - Non-linear payoff \(\propto ETH^2\). Gains/losses magnified.  
+2. **Funding Mechanics**:  
+   - Daily funding to keep the squared price near fair value.  
+3. **Price & Index**:  
+   - Mark Price vs. “ETH^2 /some factor,” potentially less intuitive.  
+4. **Separate “Powers” Category**:  
+   - DERI labels these under “Powers,” with mBTC^2, mETH^2, etc.  
+5. **Funding Chart**:  
+   - Fluctuations in daily funding. Squared perps may see higher volatility in funding.  
+6. **Net Position**:  
+   - “-0.264 ETH” indicates partial squared exposure.
+
+**What It Has**  
+- Non-linear payoff (squared), continuous funding, separate category in UI.
+
+**What Might Be Missing (Flow EVM + Cadence)**  
+1. **Composability**:  
+   - Could combine with lending or options for advanced hedging.  
+2. **Automated Liquidation**:  
+   - Resource-based partial close if margin dips.  
+3. **User-Defined Collateral**:  
+   - NFTs, staked tokens, etc.
+
+**Ideas / Suggestions**  
+1. **Flow EVM Power Perpetual**:  
+   - Create squared or cubed payoffs on-chain, referencing oracles for base price.  
+2. **Integrate Options**:  
+   - Buy puts or calls alongside the power perp to cap risk.  
+3. **Auto-Hedged Pools**:  
+   - AMM or vault invests in power perpetuals, receives funding, adjusts risk.  
+4. **Transparent Governance**:  
+   - DAO manages the factor or funding parameters.
+
+**Comparisons / Where It Could Go**  
+- More exotic than standard perps. Flow EVM can unify them with other DeFi tools.  
+- Potential next step: implementing a squared payoff with a resource-based margin aggregator.
+
+---
+
+## **Gamma Swap**
+
+### **Screenshot 11 – Gamma Swap**
+**Reference**:  
+![Screenshot 11 – Gamma Swap](DeFi-Platforms-Comparison/Deri-Io-Gamma-Swap.png)
+
+Below is an in-depth overview of **Gamma Swap**, a new derivative for **constant Gamma**. The **long** side obtains a payoff \(\propto (x - x_0)^2\); the **short** side collects funding, with payoff \(\propto -(x - x_0)^2\). This product is for traders needing direct curvature exposure (\(\Gamma\)) or wanting to offset negative Gamma from other positions.
+
+---
+
+### **Gamma Swap Basics**
+
+1. **Pure Constant Gamma**:  
+   - \(\mathrm{PnL} \propto (x - x_0)^2\) for longs, \(\mathrm{PnL} \propto -(x - x_0)^2\) for shorts.  
+   - No expiry, funding-based approach, zero initial \(\Delta\) if \(x_0\) is the entry price.
+
+2. **Use Cases**:  
+   - **Gamma Hedging** (LPs, option writers).  
+   - **Speculative Volatility** (bet on big price moves in either direction).
+
+3. **PNL Curve**:  
+   - Parabola shape ignoring fees/slippage. Gains/losses scale with \((x - x_0)\)^2.  
+   - Minimal payoff if price stays near \(x_0\), large payoff for big deviations.
+
+**How It Differs**  
+- **Futures** are linear, **options** have piecewise payoffs, **power perps** do \(x^n\).  
+- **Gamma Swap** specifically targets \((x - x_0)^2\).
+
+---
+
+### **Key Mechanics**
+
+1. **Payoff & Funding**:  
+   - Long pays funding, short receives it.  
+   - Composite mark price from 1 Power Perp minus some multiple of a Perp Future.
+
+2. **Zero Delta Initially**:  
+   - If \(x_0\) is current price, \(\Delta=0\) at inception.  
+   - \(\Delta\) grows as price deviates from \(x_0\).
+
+3. **Margin & Greeks**:  
+   - \(\Gamma \approx \text{constant}\).  
+   - \(\Delta\) evolves linearly with \((x - x_0)\).  
+   - Greek-based margin might apply a second-order Taylor expansion for worst-case changes.
+
+---
+
+### **Why Not Just Combine Futures + Power Perps?**
+
+- Doing so individually wastes margin on offsetting deltas and adds transaction overhead.  
+- Gamma Swap is an all-in-one, more capital-efficient product.
+
+---
+
+### **Practical Applications**
+
+1. **Hedging Impermanent Loss**:  
+   - AMM LPs with negative Gamma can buy Gamma Swap to offset.  
+2. **Options Market Makers**:  
+   - Hedge or manage net \(\Gamma\) without continuous rebalancing.  
+3. **Volatility Plays**:  
+   - Long side if expecting large moves, short side if expecting price stability.
+
+---
+
+### **Comparison to Flow EVM / Cadence**
+
+1. **Resource-Oriented Composability**:  
+   - Single Cadence transaction for margin deposit, opening Gamma Swap, optional leftover yield deposit.  
+2. **Integration with DeFi**:  
+   - Could borrow stables, open a Gamma Swap, manage partial hedges, all on Flow EVM.  
+3. **Advanced Governance**:  
+   - Funding and formula updates via on-chain proposals.  
+4. **Potential**:  
+   - A new frontier for pure \(\Gamma\) trades in a user-friendly, atomic manner.
+
+---
+
+### **Takeaways**
+
+- **Constant \(\Gamma\)** in a single perpetual product.  
+- **Mathematically** constructed from power + perp, but more efficient.  
+- **New Frontier for DeFi**: Let traders hedge or speculate on curvature.  
+- **Risks**: Large price moves can yield big losses for the short side; funding can be volatile.  
+- **Use Cases**: Impermanent loss hedge, option \(\Gamma\) hedging, volatility speculation.
+
+By integrating **Gamma Swap** on **Flow EVM** with **Cadence**, traders can seamlessly manage advanced curvature-based strategies, bridging the best of DERI’s on-chain approach with Flow’s resource security and atomic composability.
+
+---
+
+## **Overall Conclusions & Next Steps**
+
+Across **Futures**, **Perpetual Options**, **Power Perpetuals**, and **Gamma Swap**, DERI.IO showcases a robust set of on-chain derivative instruments. **Flow EVM + Cadence** can amplify these products by:
+
+- **Unifying** multi-step transactions into a single resource-oriented contract call (depositing collateral, opening positions, leftover yield deposits, partial liquidation triggers).  
+- **Enabling** staked tokens or NFTs as collateral with a discount factor system governed on-chain.  
+- **Integrating** with Flow-based oracles, lending, AMMs, yield protocols for cross-protocol margin or advanced vault strategies.
+
+A **“super dApp”** could combine the best aspects of Deribit-like UIs, DERI’s on-chain non-custodial approach, Flow’s resource-oriented security, and new feature ideas (e.g., exotic combos, partial auto-hedge, governance-based discount updates). This synergy has the potential to push DeFi derivatives into more powerful, accessible, and secure territory.
