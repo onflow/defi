@@ -1022,3 +1022,624 @@ Across **Futures**, **Perpetual Options**, **Power Perpetuals**, and **Gamma Swa
 - **Integrating** with Flow-based oracles, lending, AMMs, yield protocols for cross-protocol margin or advanced vault strategies.
 
 A **“super dApp”** could combine the best aspects of Deribit-like UIs, DERI’s on-chain non-custodial approach, Flow’s resource-oriented security, and new feature ideas (e.g., exotic combos, partial auto-hedge, governance-based discount updates). This synergy has the potential to push DeFi derivatives into more powerful, accessible, and secure territory.
+
+
+# Platform: Cetus (on SUI)
+
+**Cetus** is a decentralized exchange (DEX) on SUI, offering features like **Swaps** (with an Aggregator mode), **Limit Orders**, and **DCA (Dollar-Cost Averaging)**. Below are initial screenshots highlighting its core trading interface. We’ll then draw parallels to how these features might integrate or be enhanced on **Flow EVM** using **Cadence** and resource-oriented design, especially for advanced strategies like range-based CLMMs or multi-asset leveraged farming.
+
+---
+
+## **Screenshot 1**  
+**Title**: *Cetus Swap (Aggregator Mode)*  
+**Reference**:  
+![Screenshot 1 – Cetus Swap Aggregator](DeFi-Platforms-Comparison/Cetus-Swap.png)
+
+### **Observations / Commentary**
+
+1. **Aggregator Mode**  
+   - Cetus can route trades across multiple liquidity sources or pools, aiming for the best price.  
+   - The UI calculates your “You Pay” (in USDC) and “You Receive” (in SUI), with a “Price Difference” or “cheaper than X” note to indicate potential savings.
+
+2. **Token Pair & Rate**  
+   - In this screenshot, the user is swapping **USDC** to **SUI**. The aggregator displays the effective rate plus minimum received tokens (protecting against slippage).
+
+3. **Slippage & Route**  
+   - “0.5%” indicates a chosen slippage tolerance; the route is USDC → TKR → WETH → SUI (hypothetical chain). This route can be hidden or shown in advanced detail.
+
+4. **Auto Router**  
+   - The system automatically picks or aggregates routes across different pools or AMMs on SUI.  
+   - The user can toggle aggregator mode on or off.
+
+5. **Reference Prices**  
+   - Bottom panel shows price references for USDC ($0.999 ~ 1.00) and SUI ($2.515 in the screenshot, down 6.45%). Provides quick context for market conditions.
+
+### **What It Has**
+
+- **1-Click Swaps** with aggregator routing.  
+- **Slippage Control** and real-time route breakdown.  
+- **Price Indicators** showing relative token values and changes.
+
+### **What Might Be Missing (Flow EVM + Cadence)**
+
+1. **Resource-Oriented Swap**  
+   - Instead of typical contract calls, a Flow-based aggregator can unify deposit + swap + leftover yield deposit in one transaction.  
+   - Tokens are resources in Cadence, ensuring no accidental token duplication.
+
+2. **Multi-Step Composability**  
+   - Combine a swap with lending or an immediate deposit into a CLMM position, all in a single atomic transaction.
+
+3. **Advanced Slippage / Route Governance**  
+   - Potential governance to decide aggregator sources or priority on Flow. 
+   - If we integrate with a specialized Flow CLMM, could route partial trades or slip in/out of multiple pools.
+
+### **Ideas / Suggestions**
+
+1. **Flow EVM Aggregator**  
+   - A built-in aggregator referencing multiple Flow-based DEXes or bridging to external routes.  
+2. **Atomic Swap + Derivatives**  
+   - Immediately open a leveraged position or an option after swapping.  
+3. **Enhanced Slippage Management**  
+   - Resource-based checks to revert if the user’s leftover resource is below a certain threshold, or if aggregator results deviate from reference oracles.
+
+### **Comparisons / Where It Could Go**
+
+- **Compared to Standard DEX UI**  
+  - Cetus provides aggregator mode, but a Flow-based aggregator might unify more protocols.  
+- **Potential Next Steps**  
+  - Explore bridging aggregator logic into Flow EVM, referencing multiple CLMM pools.  
+  - Possibly integrate with advanced Flow DeFi protocols for partial “range” or multi-asset leveraged strategies.
+
+---
+
+## **Screenshot 2**  
+**Title**: *Cetus Limit Orders*  
+**Reference**:  
+![Screenshot 2 – Cetus Limit Orders](DeFi-Platforms-Comparison/Cetus-Limit.png)
+
+### **Observations / Commentary**
+
+1. **Limit vs. Market vs. DCA**  
+   - Next to “Swap,” the user can select **Limit** or **DCA**. This screenshot shows a **Limit Order** to sell SUI for USDC at a chosen rate (2.5111).  
+   - Expiry is set to “7 Days,” after which the limit order presumably cancels if unfilled.
+
+2. **Set Volume & Price**  
+   - The user enters how many SUI to sell (12.388..., worth \$31.1) and wants to receive 31.108602 USDC if the price hits 2.5111.  
+   - The interface calculates the total or partial fill outcome.
+
+3. **Convenient Expiration**  
+   - The user can pick a time horizon (7 Days, or possibly indefinite) for the limit order.  
+   - Cetus might store this order in a contract or orderbook on-chain.
+
+4. **Slippage & Partial Fills**  
+   - Not explicitly shown, but typically limit orders can fill partially if the price is above/below the threshold at some point.
+
+### **What It Has**
+
+- **Basic Limit Orders** on an on-chain DEX environment.  
+- **Custom Expiry** for limit order duration.  
+- **Simple UI** for specifying the desired rate.
+
+### **What Might Be Missing (Flow EVM + Cadence)**
+
+1. **Resource-Oriented Limit Orders**  
+   - Instead of purely ephemeral limit orders, on Flow we can store a user’s “limit order resource,” guaranteeing no double-spending or leftover partial fill confusion.
+
+2. **Multi-Asset Condition**  
+   - Potentially define advanced triggers: “Only fill if aggregator can route me a stable price across multiple pools,” or “only fill if I can also borrow at X rate.”
+
+3. **Automated Strategies**  
+   - Combine limit orders with a yield aggregator or a CLMM range strategy if the limit is hit.
+
+### **Ideas / Suggestions**
+
+1. **Flow-Based “Order Resource”**  
+   - A token-like resource that represents an open limit order. If partial fill occurs, the resource is updated with the new quantity.  
+2. **Advanced Expiry & Condition**  
+   - The user might chain conditions: “If not filled by day 7 at or above 2.5, revert the tokens to a new strategy.”  
+3. **Integration with Lending**  
+   - Place a limit order while some of your tokens are still earning interest or staked as partial collateral. If the order fills, the Cadence transaction can auto repay or top up collateral.
+
+### **Comparisons / Where It Could Go**
+
+- **Compared to CEX limit orders**  
+  - Cetus provides an on-chain limit order but is simpler. Flow EVM might offer more advanced or composable logic.  
+- **Potential Next Steps**  
+  - Explore “Conditional Orders” or “Multi-asset limit orders” on Flow.  
+  - Possibly unify limit order code with CLMM or advanced aggregator logic.
+
+---
+
+## **Screenshot 3**  
+**Title**: *Cetus DCA (Dollar-Cost Averaging)*  
+**Reference**:  
+![Screenshot 3 – Cetus DCA Setup](DeFi-Platforms-Comparison/Cetus-DCA.png)
+
+### **Observations / Commentary**
+
+1. **DCA Interface**  
+   - The user sets a schedule: invests every 1 hour, over 2 orders, with a “Set Price Range” for the DCA to execute if the price is within that range.  
+   - The screenshot shows selling SUI for USDC in increments, presumably to reduce short-term volatility risk.
+
+2. **Frequency & Duration**  
+   - “Invest Every 1 Hour,” “Over 2 Orders” means it’ll attempt 2 separate trades an hour apart if the price meets the user’s range.  
+   - Could be daily, weekly, or any timeframe if the UI/contract supports it.
+
+3. **Price Range**  
+   - The user can define a min or max rate at which they’ll accept the trade. If the SUI/USDC price is outside that range, the DCA skip triggers.
+
+4. **Automated Partial Execution**  
+   - The system presumably checks the price feed or aggregator each hour, then executes a partial trade if conditions match.
+
+### **What It Has**
+
+- **Automated DCA** in an on-chain environment, controlling order frequency and price range.  
+- **Simple UI** for schedule, total or per-order amounts.
+
+### **What Might Be Missing (Flow EVM + Cadence)**
+
+1. **Resource-Oriented Recurring Orders**  
+   - A “DCA resource” could hold user’s tokens and release them in intervals. Partial leftover if not triggered, all governed by a single Cadence contract.
+
+2. **Advanced Multi-Step**  
+   - If a DCA order triggers, the system could automatically deposit the newly bought (or sold) tokens into a yield aggregator or open a derivative position.  
+   - On Flow, this can be a single “DCA strategy resource” with complex steps.
+
+3. **Cross-Protocol DCA**  
+   - Potential aggregator approach: if the user wants to DCA from SUI to multiple stablecoins (USDC, USDT) or even to a lending position, the contract orchestrates everything.
+
+### **Ideas / Suggestions**
+
+1. **Flow “Scheduled Resource Execution”**  
+   - Cadence code that unlocks partial amounts at each interval, checking a price oracle or aggregator route.  
+2. **DCA with Range or Condition**  
+   - If the range is never met, the resource can revert after a certain time, or roll over into a different strategy.  
+3. **Integration with Derivatives**  
+   - E.g., “DCA into an option writing strategy every hour,” or “DCA into a power perpetual.”
+
+### **Comparisons / Where It Could Go**
+
+- **Compared to Standard DEX DCA**  
+  - Cetus’s approach is simplified. Flow can unify it with resource-based param expansions, advanced oracles, multi-protocol deposits.  
+- **Potential Next Steps**  
+  - Explore bridging the DCA logic to advanced yield or derivative markets on Flow.  
+  - Possibly set up recurring “range-bound” DCA that transitions to a CLMM position once filled.
+
+---
+
+## **Why This Matters for Flow EVM**
+
+1. **KittyPunch & CLMM**:  
+   - The user references a Flow EVM dApp “KittyPunch” with a CLMM (concentrated liquidity market maker). The DCA feature from Cetus could be integrated so that users can DCA into their CLMM positions.  
+   - Resource-based range positions: let the user precisely define the price boundaries for their liquidity, or do partial invests over time.
+
+2. **Multi-Asset Leveraged Farming**:  
+   - Another SUI app, mole.fi, does single-asset borrowing for leveraged farming. On Flow, we might want a multi-asset approach plus user-defined CLMM range.  
+   - That synergy suggests a single transaction orchestrating borrowing, liquidity provisioning, range setup, DCA expansions, and partial rebalancing.
+
+3. **Cadence: Atomic + Resource-Oriented**  
+   - Each user’s position (limit order, aggregator swap, DCA, leveraged farm) is a distinct resource. If partial execution or reverts occur, everything is safe from partial leftover states.  
+   - Users can more easily combine advanced steps across different DeFi protocols on Flow.
+
+---
+
+## **Overall Conclusion**
+
+Cetus on SUI provides a robust DEX with **Swap (Aggregator)**, **Limit Orders**, and **DCA**—solid building blocks for user-friendly trading, scheduling, and incremental investing. By **porting these concepts to Flow EVM** and leveraging **Cadence**:
+
+- **Aggregator**: unify multi-pool or multi-protocol routes in a resource-based environment.  
+- **Limit Orders**: store them as on-chain resources, enable advanced triggers or partial closes.  
+- **DCA**: create a single “recurring order resource,” handling time intervals, leftover tokens, or auto-deploying capital to yield strategies.  
+- **CLMM & Leverage**: synergy with a concentrated liquidity approach, plus a more flexible multi-asset borrowing system than existing solutions.
+
+Bringing Cetus’s features together with advanced Flow-based dApps (like KittyPunch CLMM or a multi-asset leveraged farming protocol) can yield a **super dApp** that combines DEX aggregator logic, time-based or range-based investment, and robust resource-oriented user positions. This vision supports deeper composability, safer margining, and a more seamless DeFi user experience on **Flow EVM**.
+
+# Platform: Cetus (on SUI)
+
+Below are additional screenshots showcasing **Cetus’s Liquidity Pools** and **Range Liquidity** (CLMM-style) interface. Cetus provides a flexible interface for liquidity providers (LPs), allowing them to choose specific price ranges or a “conservative/active/full range” preset, somewhat akin to Uniswap v3’s concentrated liquidity. We then consider how these concepts might be integrated or extended on **Flow EVM** with **Cadence** and resource-oriented design.
+
+---
+
+## **Screenshot 4**  
+**Title**: *Cetus Liquidity Pools Overview*  
+**Reference**:  
+![Screenshot 4 – Cetus Liquidity Pools](DeFi-Platforms-Comparison/Cetus-Pools.png)
+
+### **Observations / Commentary**
+
+1. **TVL & Volume**  
+   - Shows **$164,458,175.07** in total value locked, **$47.49B** in cumulative volume, and a 24h trading volume chart (~$107.94M).  
+   - Highlights the platform’s overall scale and user engagement.
+
+2. **Pools vs. Positions**  
+   - A toggle to view existing **Pools** (752 in the screenshot) or the user’s **Positions**.  
+   - “Add Liquidity” and “Create a new pool” buttons for quick entry.
+
+3. **Pool List**  
+   - Example pairs: **SUI–USDC**, **DEEP–SUI**, **AUSD–USDC**, each with liquidity, 24h volume, 24h fees, rewards, and an APR estimate (108.59%, 305.02%, 14.82%, etc.).  
+   - The “Deposit” button under “Actions” leads to a range liquidity interface or a standard liquidity deposit flow.
+
+4. **Watchlist / Filter**  
+   - Users can filter by token or toggle “Incentivized Only” to find pools offering extra rewards.  
+
+### **What It Has**
+
+- **High-Level Liquidity Stats** (TVL, volume, fees).  
+- **Multiple Pools** with different fee tiers or incentives.  
+- **APR & Rewards** indicating potential yield from providing liquidity.
+
+### **What Might Be Missing (Flow EVM + Cadence)**
+
+1. **Resource-Based Pool & Position**  
+   - Each liquidity position could be a Cadence “resource,” making partial deposits/withdrawals or range updates simpler and safer.  
+   - Eliminates confusion around leftover partial tokens or failing transactions.
+
+2. **Integrated Lending/Farming**  
+   - Immediately borrow stablecoins (in the same transaction) and deposit them into a chosen pool.  
+   - Automate yield strategies or cross-protocol margin with a single atomic transaction.
+
+3. **Multi-Asset Incentive Handling**  
+   - On Flow, a governance token or multiple reward tokens could be distributed automatically to the user’s position resource.
+
+### **Ideas / Suggestions**
+
+1. **Flow EVM Pool Explorer**  
+   - A resource-based version of the pool list, showing each pool’s details, plus an integrated aggregator to route trades or deposit in the best APR pools.  
+2. **Transparent On-Chain Governance**  
+   - If fee tiers or incentives change, a Flow-based DAO can manage them. Users can see changes or proposals in a single, resource-based event system.  
+3. **Vault Strategies**  
+   - For novice users, automatically manage partial rebalancing between multiple pools, or shift from conservative to active range as markets fluctuate.
+
+### **Comparisons / Where It Could Go**
+
+- **Compared to Uniswap v3**  
+  - Cetus on SUI is akin to a Uniswap v3 approach with LP range selection. Flow EVM could unify it with resource-based positions for improved clarity and fewer manual steps.  
+- **Potential Next Steps**  
+  - Integrate advanced bridging (Flow <-> SUI) or replicate Cetus’s CLMM logic on Flow with Cadence.  
+  - Possibly add cross-protocol margin or partial liquidation logic.
+
+---
+
+## **Screenshot 5**  
+**Title**: *Provide Liquidity (Range Selection)*  
+**Reference**:  
+![Screenshot 5 – Cetus Range Liquidity](DeFi-Platforms-Comparison/Cetus-Add-CLMM-Liquidity.png)
+
+### **Observations / Commentary**
+
+1. **Range Selection**  
+   - UI allows choosing a **Conservative**, **Active**, **Full Range**, or **Custom** approach.  
+   - The chart shows current price (2.514059 USDC per SUI) and a histogram or heatmap of liquidity distribution.
+
+2. **Leverage**  
+   - A toggle for up to “3x” leverage indicates you can deposit fewer tokens but get amplified exposure.  
+   - Possibly integrated with a lending module behind the scenes.
+
+3. **Deposit Amounts**  
+   - The user can specify how much SUI + USDC to provide. The interface calculates total amounts ($0.78 in the screenshot) and the ratio (SUI 64.68% / USDC 35.32%).
+
+4. **Pool APR & Stats**  
+   - Shows 108.59% APR, $22.56M TVL, $22.43M 24h volume, $56k in 24h fees.  
+   - Encourages users by displaying potential yields.
+
+5. **One-Step Liquidity**  
+   - Pressing “Add Liquidity” finalizes the deposit. The user can manage the position in “My Positions” or see it under the liquidity pool tab.
+
+### **What It Has**
+
+- **CLMM-Style Range**: LPs pick a custom or preset range for their liquidity.  
+- **Integrated Chart**: Helps visualize where the price currently sits and where the user’s range will apply.  
+- **Leverage**: Possibly an internal leveraged position or a separate loan aggregator.
+
+### **What Might Be Missing (Flow EVM + Cadence)**
+
+1. **Resource-Oriented Range Position**  
+   - Each LP position can be a Cadence resource, making partial range updates or expansions simpler.  
+   - If the user wants to add more range or shift it, they modify that resource in an atomic update.
+
+2. **Auto-Adjust or DCA**  
+   - Could incorporate the DCA feature directly: “Spread my deposit across price bands over time.”  
+   - If the user sets a range but wants it auto-shifted if the market moves drastically.
+
+3. **Cross-Protocol Leverage**  
+   - Potentially let the user borrow stablecoins from a Flow-based lending protocol in the same transaction, then deposit them in a CLMM range, with a resource-based margin check.
+
+### **Ideas / Suggestions**
+
+1. **Flow EVM “Range Resource”**  
+   - The user picks a custom range. That range is minted as a resource, ensuring no accidental duplication or leftover. They can partially withdraw or shift the range with minimal friction.  
+2. **DCA + Range**  
+   - Set a DCA plan that gradually invests more into the range as price moves or after each interval.  
+3. **Advanced Governance on Fee Tiers**  
+   - If the protocol wants multiple fee tiers (0.25%, 0.05%), a Flow-based DAO can dynamically adjust them. The user’s position resource updates accordingly.
+
+### **Comparisons / Where It Could Go**
+
+- **Compared to Uniswap v3 Range**  
+  - Similar mechanics, but on SUI with a simpler or more streamlined UI.  
+  - Flow’s resource approach can reduce confusion about partial positions or leftover tokens.  
+- **Potential Next Steps**  
+  - Implement a fully resource-based CLMM on Flow. Each position is an NFT-like resource with additional capabilities (e.g., partial merges or expansions).  
+  - Add integrated lending or auto-hedging if the user’s margin is threatened by price shifts outside their range.
+
+---
+
+## **Overall Conclusions**
+
+Cetus’s liquidity pools and CLMM approach provide a robust environment for on-chain AMM trading and range liquidity. On Flow EVM, we could **elevate** these features by:
+
+- **Resource-Oriented Positions**: Each LP deposit becomes a unique resource for partial expansions, merges, or shift of range.  
+- **Atomic & Composable**: Combine DCA, aggregator swaps, leveraged borrowing, and range liquidity in one Cadence transaction.  
+- **Advanced UI/UX**: Offer the user preset strategies (Conservative, Active, Full, Custom) plus multi-asset deposit or auto-hedge.  
+- **Governance & Oracles**: Fee tiers or reward parameters managed by on-chain proposals; oracles feeding real-time price data for aggregator or leveraged logic.
+
+Such integrations pave the way for a **super dApp** on Flow EVM that merges CLMM liquidity, DCA, aggregator-based swaps, advanced limit orders, multi-asset leveraged farming, and more—**all** with the safety and composability of resource-oriented design in Cadence.
+
+# Platform: Mole.fi (on SUI)
+
+**Mole.fi** is a leveraged yield-farming protocol on SUI that combines **lending** (borrowing assets) with **CLMM** liquidity provision on **Cetus**. Users can deposit one token, borrow another, and form a leveraged LP position. Below are some screenshots and an overview of its functionality, along with suggestions on how a **Flow EVM + Cadence** approach could expand or improve upon it—especially regarding multi-asset lending, user-defined CLMM ranges, and more resource-oriented flexibility.
+
+---
+
+## **Screenshot 1 & 2**  
+**Title**: *Mole.fi Savings & Farm Overview*  
+**References**:  
+1. ![Screenshot 1 – Mole.fi Savings](DeFi-Platforms-Comparison/Mole-Lending.png)  
+2. ![Screenshot 2 – Mole.fi Farm List](DeFi-Platforms-Comparison/Mole-Farms.png)
+
+### **Observations / Commentary**
+
+1. **Savings (Lending) Dashboard**  
+   - Mole has its own **Savings** section showing a “My Net APY” circle, total **Savings TVL** ($5.63M in the screenshot), and user deposit of $0.  
+   - Lists assets (USDC, BUCK, etc.) with deposit/borrow rates. E.g., USDC might have a 21.98% total APY, with a “Deposit” or “Borrow” flow.
+
+2. **Farm Section**  
+   - This interface shows “Farm Reward” and “Trade Reward” for each farm. For example:  
+     - **USDC-FDUSD** at 32.75% total yield, with 95% Farm Reward and 17.75% Trade Reward.  
+     - **USDC-SUI** at a combined 510.27% yield (69.91% farm, 440.78% trade reward).  
+   - Each farm is tied to a CetusClmm pool (like USDC-SUI, wUSDT-USDC, etc.).
+
+3. **Back-End for Range**  
+   - The platform automatically picks a range on Cetus (the user doesn’t choose). This restricts advanced users who might want more control over their CLMM position boundaries.
+
+4. **Single-Asset Borrowing**  
+   - Mole currently only allows borrowing one other asset. They deposit one token, borrow the other, forming a 2-token LP. There’s **no** multi-asset or more complex approach.
+
+### **What It Has**
+
+- **Lending + Farming** in a single interface.  
+- Automatic range creation on Cetus.  
+- Potentially high APY from farm/trade rewards, especially for more volatile pairs.
+
+### **What Might Be Missing (Flow EVM + Cadence)**
+
+1. **Dedicated Lending Market Integration**  
+   - Mole’s internal lending might limit external liquidity or specialized rates. A Flow-based aggregator could integrate with multiple lending protocols for better rates or more collateral options.
+
+2. **User-Defined CLMM Range**  
+   - Currently, Mole auto-sets the range for new positions. Flow EVM users might want a custom range or to rely on a “smart range” module.  
+   - This could be a separate resource so advanced users can define narrower/wider bounds.
+
+3. **Multi-Asset Borrowing**  
+   - Borrow multiple tokens (e.g., partially borrow USDC + partially borrow wETH) to form a tri-token or advanced strategy.  
+   - A resource-based approach might unify margin checks for multiple borrowed assets.
+
+4. **Granular Rebalancing Control**  
+   - Mole rebalances behind the scenes. Some advanced users might want partial or threshold-based rebalancing triggers, or manual override if they sense big market moves.
+
+### **Screenshot 3**  
+**Title**: *Add Assets to Farm (Leverage Setup)*  
+**Reference**:  
+![Screenshot 3 – Mole.fi Add Assets to Farm](DeFi-Platforms-Comparison/Mole-Add-Liquidity.png)
+
+1. **Leverage Slider**  
+   - The user can choose leverage from 1–3x, borrowing either SUI or USDC.  
+   - “Farm Reward” + “Trade Reward” yields are shown, while “Borrow Interest” is subtracted.
+
+2. **Asset Summary**  
+   - E.g., the user has borrowed 20.52 SUI, or 20.52 USDC, forming an LP with 42.11 USDC + 16.1 SUI net exposure.  
+   - The system automatically opens a position on Cetus, presumably specifying a default range.
+
+3. **Position Value**  
+   - Summarizes the total value of the leveraged position.  
+   - The user is effectively **long** one side and **short** the borrowed side if the price changes beyond a certain range.
+
+### **What It Has**
+
+- **One-click Leveraged Farming**: deposit X, borrow Y, auto-add to a Cetus CLMM pool.  
+- **Farm Rewards**: Additional token incentives, plus potential trade fees.  
+- **Simple UI**: Sliders for leverage, partial or full deposit of user tokens.
+
+### **What Might Be Missing (Flow EVM + Cadence)**
+
+1. **Flexible Multi-Asset**  
+   - Users could pick “borrow 40% USDC, 60% ETH,” deposit 1 SUI, forming a tri-asset range in the same pool or across multiple pools.  
+   - A single resource-based position tracks all margin and borrowed assets.
+
+2. **User-Defined Ranges**  
+   - “Auto-range” might not suit advanced traders. A Flow-based system can allow manual or partial custom ranges, or multiple range segments.
+
+3. **Advanced Rebalancing Triggers**  
+   - E.g. rebalancing if price leaves 20% from the center. Or partial liquidation if margin ratio dips below X.  
+   - Could unify a user’s entire portfolio in one resource-based aggregator, so leftover yields or borrowed assets can be reallocated on the fly.
+
+4. **Cross-Protocol Lending**  
+   - Instead of Mole’s built-in lending, a Flow aggregator could let users pick from multiple lending sources (whichever has the best rate). A resource-based approach ensures atomic safety if any sub-step fails.
+
+### **Ideas / Suggestions**
+
+1. **Flow EVM “Leverage Resource”**  
+   - The user’s leveraged position is minted as a single resource, containing borrowed token(s), deposit, range parameters. Rebalancing or partial close modifies this resource in one transaction.
+
+2. **Integration with External Lending**  
+   - A universal Flow-based aggregator that can tap X or Y lending protocol, or a stablecoin aggregator for best rates.  
+   - The user sees a single “leverage slider,” but behind the scenes, the aggregator picks the best route.
+
+3. **Modular Range**  
+   - Offer “Auto-range,” “Manual range,” or “Hybrid range.” If the user picks manual, let them specify min/max. If “Hybrid,” the system adjusts the range if the price deviates 10%, for instance.
+
+### **Comparisons / Where It Could Go**
+
+- **Compared to Traditional Leveraged Farming**  
+  - Mole is bridging the gap between lending and CLMM yield. Flow EVM can push this further with multi-step atomic actions.  
+- **Potential Next Steps**  
+  - Build a “Flow Leverage aggregator” that sees multiple lending pools, merges user-chosen or auto range liquidity.  
+  - Possibly incorporate DCA or auto-hedge strategies for the borrowed side if price moves too far.
+
+---
+
+## **Key Takeaways**
+
+- Mole.fi offers a simplified “leveraged yield farm” on SUI, automatically setting a CLMM range on Cetus.  
+- Users deposit one token, borrow another, and farm. They lack advanced control over the range or multi-asset borrowing.  
+- Flow EVM with Cadence could **expand** these concepts by allowing:
+
+  1. **Choice of Lending Source**  
+     - Pick from multiple Flow-based or cross-chain lending markets for best interest rates or flexible collateral.  
+
+  2. **Manual or Auto Range**  
+     - Let advanced users define custom CLMM boundaries or rely on algorithmic shifting if they prefer less micromanagement.  
+
+  3. **Multi-Token Borrowing**  
+     - Borrow multiple tokens or revolve partial borrow across different assets for more sophisticated LP combos.  
+
+  4. **Resource-Oriented Hedging/Rebalancing**  
+     - Each leveraged position is a Cadence resource, with partial modifications or triggers handled atomically.  
+
+By combining Mole’s leveraged farm approach with a more open, resource-based, and multi-protocol aggregator on **Flow EVM**, we can craft a **super dApp** that seamlessly integrates advanced lending markets, user-driven or auto-range CLMM positions, multi-asset borrowing, and dynamic rebalancing. This synergy can unlock more complex yield strategies while providing safer, more flexible margin management through Cadence’s resource paradigm.
+
+# Platform: Francium (on Solana)
+
+**Francium** offers leveraged yield farming strategies on Solana, supporting **neutral farming, long/short farming**, and various simulation tools. It primarily relies on an **AMM with Uniswap v2**-style liquidity pools (e.g., Orca, Raydium), rather than a concentrated liquidity approach. The interface provides graphical simulations for estimated PnL vs. price movements, but does not incorporate advanced range-based LP functionality.
+
+Below are screenshots of **Francium’s** farm interface, followed by an explanation of how **Cetus (CLMM on SUI)**, **Mole.fi (leveraged aggregator on SUI)**, and **Francium (leveraged yield farm on Solana)** concepts can merge into a **unified, more advanced leveraged farming** solution—potentially on **Flow EVM** with **Cadence**.
+
+---
+
+## **Screenshot 1 & 2**
+**Title**: *Francium Leveraged Farming Simulator*  
+**References**:  
+1. ![Screenshot 1 – Farm SOL-USDC (Francium)](DeFi-Platforms-Comparison/Francium-Liquidity-Graph.png)  
+2. ![Screenshot 2 – Additional Stats (Francium)](DeFi-Platforms-Comparison/Francium-Details-StopLoss.png)
+
+### **Observations / Commentary**
+
+1. **Multiple Farming Templates**  
+   - **Neutral Farming**: A balanced approach aiming to reduce directional risk.  
+   - **Long Farming**: Extra exposure if the user is bullish on the base asset (e.g., SOL).  
+   - **Short Farming**: Allows the user to short the borrowed asset, effectively betting on its price decline.
+
+2. **Simulator Graph**  
+   - Shows how the user’s **equity** (percent of current equity) changes relative to the underlying price (SOL price in USDC).  
+   - Displays a projected PnL curve over certain time horizons (e.g., 15 days, 30 days).
+
+3. **Leverage Slider**  
+   - 1–3x with half steps in between (1.5x, 2.0x, 2.5x). Higher leverage means more borrowed tokens, increasing risk and potential reward.
+
+4. **Stop-Loss (Beta)**  
+   - A togglable feature to automatically close positions if they drop below a certain threshold. Helps limit catastrophic losses, though it’s still in testing.
+
+5. **Detailed APR Breakdown**  
+   - **Yield Farming APR** (22.14% ~ 66.42% in the example).  
+   - **Trading Fee Income APR** (part of the pool’s fee share).  
+   - **Borrowing Interest** (~9.96%).  
+   - Net daily or total APR after combining those figures.
+
+6. **Assets Supplied vs. Borrowed**  
+   - The bottom table shows how much USDC/SOL the user supplies, how much is borrowed, and the net exposure to each token.  
+   - “Kill Buffer” or “Position Value” displayed for liquidation risk references.
+
+### **What It Has**
+
+- **Leveraged Farming** with flexible “neutral/long/short” templates.  
+- **Simulator** displaying PnL curves vs. price changes.  
+- **Stop-Loss** (beta) for partial risk management.
+
+### **What Might Be Missing (Compared to CLMM or Flow EVM + Cadence)**
+
+1. **CLMM/Range LP**  
+   - Francium is built on Uniswap v2-like AMMs, so LP positions are spread across 0 to ∞ price range.  
+   - Concentrated liquidity offers more capital efficiency but requires specifying min/max price ranges.
+
+2. **Resource-Oriented Positions**  
+   - On Flow, each leveraged position (with borrowed tokens, partial hedge, etc.) could be a resource, simplifying partial expansions, rebalancing, or advanced triggers.
+
+3. **Multi-Asset Borrowing**  
+   - Still primarily single-asset borrowing.  
+   - A Flow aggregator could let users borrow multiple tokens or dynamically shift borrowed asset composition.
+
+4. **Cross-Chain or Multi-Protocol**  
+   - Tied to Solana-based liquidity. A Flow aggregator might unify multiple DEXes, or reference bridging solutions for deeper liquidity.
+
+### **Ideas / Suggestions**
+
+1. **CLMM Integration**  
+   - Combine Francium’s concept of leveraged yield farming with a concentrated liquidity approach (like Cetus).  
+   - The user picks a range (like in Cetus), then obtains borrowed tokens from an aggregator (like Mole), while a simulator (like Francium) shows PnL curves.  
+   - This synergy can yield more efficient capital usage and advanced hedging.
+
+2. **Flow EVM Resource**  
+   - Each leveraged “neutral farming” or “long farming” position minted as a resource, storing:  
+     - Range boundaries,  
+     - Borrowed tokens,  
+     - Collateral token(s),  
+     - Stop-loss parameters,  
+     - Ongoing simulation state.
+
+3. **Cross-Protocol Borrowing**  
+   - Instead of a single lending source, a Flow aggregator chooses the best rates from multiple markets.  
+   - Could also do partial borrowing in multiple stablecoins if beneficial for hedging or yield.
+
+4. **Advanced Stop-Loss**  
+   - Resource-based triggers that automatically close or partially reduce the position if certain price/volatility conditions occur.  
+   - Composability with Flow oracles for on-chain price feeds.
+
+### **Comparison: How Cetus, Mole, and Francium Fit Together**
+
+- **Cetus**:  
+  - A **CLMM** DEX with features like aggregator swap, limit orders, DCA, and range-based liquidity.  
+- **Mole.fi**:  
+  - A leveraged aggregator on SUI, automatically setting CLMM ranges for the user. But only single-asset borrowing and limited advanced controls.  
+- **Francium**:  
+  - A Solana leveraged yield-farming platform using v2 AMMs, but offering more strategy templates (neutral, long, short) and a simulator graph.  
+
+Combining the **best** of each:
+
+1. **CLMM from Cetus** → more capital-efficient liquidity with custom range.  
+2. **Mole-like aggregator** → bridging or multi-lending integration, so users can borrow and deposit in one flow.  
+3. **Francium-like strategy templates + simulator** → “Neutral Farming,” “Long Farming,” “Short Farming,” each with a PnL curve and price-based liquidation or stop-loss triggers.  
+
+### **Flow EVM + Cadence: Unified Leveraged Farming**
+
+- **Resource-Oriented**:  
+  Each user’s leveraged LP position is a single resource containing range definitions, borrowed assets, net exposure, and stop-loss triggers.  
+- **Multi-Lending**:  
+  The aggregator picks any Flow-based lending protocol with best rates or partial distribution.  
+- **Advanced Strategy**:  
+  - **Neutral**: Minimizes price exposure, focusing on yield from trading fees and farm rewards.  
+  - **Long**: If bullish on the base asset.  
+  - **Short**: If expecting the borrowed side to drop.  
+  - **Custom Range**: Let the user define min/max price for the CLMM portion.  
+  - **Stop-Loss** or partial auto-liquidation if the position becomes too risky.  
+
+### **Potential Next Steps**
+
+- **Prototype a “FlowFarm”** dApp merging the logic from Cetus (CLMM + aggregator swap + DCA + range UI), Mole’s leveraged aggregator approach, and Francium’s strategy templates + simulator.  
+- **Implement** a resource-based approach to unify deposit, borrow, CLMM range creation, and partial rebalancing in one atomic transaction.  
+- **Optional** bridging or cross-chain integration for assets from SUI, Solana, or Ethereum if desired.
+
+---
+
+## **Conclusion**
+
+**Francium** offers robust leveraged farming strategies on Solana but is tied to a Uniswap v2-like AMM. By merging **Francium’s** advanced strategy templates and simulator with a **CLMM** model (like **Cetus**) and a leveraged aggregator approach (like **Mole.fi**), we can create a **highly configurable, capital-efficient** leveraged farming platform. 
+
+On **Flow EVM**, **Cadence** can orchestrate everything via **resource-oriented** positions that incorporate:
+
+- **Multi-lending** sources,  
+- **User-defined or auto range** CLMM,  
+- **Neutral/long/short** strategy templates,  
+- **Stop-loss** triggers,  
+- **One-click** partial liquidation or rebalancing.
+
+This synergy enables a **super leveraged farming dApp** with advanced yield optimizations, deeper risk controls, and user-friendly UI, all while leveraging the unique composability and safety features inherent to Flow’s resource-based architecture.
